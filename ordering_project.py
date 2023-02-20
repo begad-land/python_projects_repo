@@ -33,7 +33,7 @@ class Check:
             print('for ordering more than 3 items you get a 5$ discount')
 
             for i in self.order:
-                print(f'your order: {i["item"]}| price: {i["price"]}$', end='    || ' )
+                print(f'your order: {i["item"]}| price: {i["price"]}$', end='   ' )
             print()
             print(f'your total: {total}$\nafter the discount {discount}$ ')
             print(f'the tax for your order is {round(tax,2)}$')
@@ -41,7 +41,7 @@ class Check:
         else:
          
             for i in self.order:
-                print(f'your order: {i["item"]}| price: {i["price"]}$', end='    || ' )
+                print(f'your order: {i["item"]}| price: {i["price"]}$', end='   ' )
             print()    
             print(f'total: {total}$')
             print(f'the tax for your order is {round(tax,2)}$')
