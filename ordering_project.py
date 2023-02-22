@@ -1,7 +1,6 @@
 
 print('OFFER DAY!!\norder more than 3 items and get a 5$ discount ')
 
-
 print()
 print('__________Menu_____________')
 print('   items        price')
