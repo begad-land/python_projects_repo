@@ -36,7 +36,7 @@ for question in questions:
     for choice in choices[C_no]:
         print(choice)
         print('-----')
-
+    
     answer=input('pick A/B/C/D ' ).upper()
 
     if answer==answers[C_no]:
@@ -44,7 +44,7 @@ for question in questions:
         score+=1
     else:
         print('INCORRECT')
-        score-=1
+        score - 1
         print(f'the answer is : {answers[C_no]}')
     print('---------------------')
     C_no+=1
