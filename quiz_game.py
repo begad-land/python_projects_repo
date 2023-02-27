@@ -23,6 +23,7 @@ choices=[
 
     ['A. France' , 'B. Egypt', 'C. U.S.A', 'D.Brazil' ],
     ]
+    
 
 answers=['A', 'D', 'C' ,'A', 'A', 'B' , 'B' ]
 

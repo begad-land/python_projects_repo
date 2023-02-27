@@ -5,12 +5,14 @@ class Question:
 
     def display_Qs(self):
         score=0
+        Q_num=1
         for i in self.array:
-            print(f'{i[0]}')
-
+            print(f'Q{Q_num}) {i[0]}')
+            Q_num+=1
+            
             for x in i[1]:
                 print(f'{x}\n-----------')
-
+            
             guess=input('pick A/B/C/D ').upper()
             if guess==i[2]:
                 print('CORRECT')
@@ -19,7 +21,7 @@ class Question:
                 print(f'INCORRECT\nthe answer is {i[2]}')
                 score - 1
             print('----------------------------')
-        print(f'score :{score}')  
+        print(f'score :{score}pts')  
         
 
              #q1   
@@ -36,6 +38,8 @@ q=Question([
             #q6
             ['what is the name of the species of human beings?',['A. Amphibians', 'B. Homosapiens', 'C. Mammals', 'D.Humans' ], 'B'],
             #q7
-            ['in which country is the longest river in the world?',['A. France' , 'B. Egypt', 'C. U.S.A', 'D.Brazil' ], 'B']
+            ['in which country is the longest river in the world?',['A. France' , 'B. Egypt', 'C. U.S.A', 'D.Brazil' ], 'B'],
+            #q8
+            ['which system in the human body controls emotions?',['A.Nervous system', 'B.Digestive system', 'C.Endocrine system', 'D.circulatory system' ], 'C' ]
             ])
 q.display_Qs()
