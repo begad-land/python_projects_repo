@@ -2,19 +2,29 @@
 class Question:
     def __init__(self,**kwargs) -> None:
         self.kwargs=kwargs
-
     def display_Qs(self):
         C_num=0
+        A_num=0
+        score=0
         for q in self.kwargs['questions']:
             print(q)
+
             for x in self.kwargs['choices'][C_num]:
                 print(f'{x}\n---------------------------')
-            guess=input('pick A/B/C/D ')
-        for answer in self.kwargs['answer']:
-            if guess==answer:
+            C_num+=1
+
+            guess=input('pick A/B/C/D ').upper()
+            if guess==self.kwargs['answers'][A_num]:
                 print('CORRECT')
+                score+=1     
 
-
+            else:
+                print(f'INCORRECT \nThe correct answer: {self.kwargs["answers"][A_num]}')
+                score - 1
+                A_num+=1
+            print('-----------------------------')
+        print(f'Your score: {score}pts') 
+                
 q=Question(questions=[
                       'whats the coldest planet in our solar system?', 
                       'what is the second most spoken language in the world?' ,
@@ -32,7 +42,6 @@ q=Question(questions=[
                     ['A. Amphibians', 'B. Homosapiens', 'C. Mammals', 'D.Humans'],
                     ['A. France' , 'B. Egypt', 'C. U.S.A', 'D.Brazil' ]
                     ],
-
-                    answers=['A', 'D', 'C' ,'A', 'A', 'B' , 'B' ]
-                    )
+            answers=['A', 'D', 'C' ,'A', 'A', 'B' , 'B' ]
+            )
 q.display_Qs()
