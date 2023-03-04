@@ -5,10 +5,10 @@ print()
 print('__________Menu_____________')
 print('   items        price')
 menu={
-    1:{'item':'black coffee', 'price':3 },
-    2:{'item': 'milk coffee' , 'price':4 },
-    3:{'item' :'chicken sandwich', 'price':5 },
-    4:{'item':'pepsi', 'price':2 }
+    '1':{'item':'black coffee', 'price':3 },
+    '2':{'item': 'milk coffee' , 'price':4 },
+    '3':{'item' :'chicken sandwich', 'price':5 },
+    '4':{'item':'pepsi', 'price':2 }
     }
 
 for i,y in menu.items():
@@ -29,35 +29,38 @@ class Check:
 
         if len(self.order) > 3: 
             discount=total-5
-            print('for ordering more than 3 items you get a 5$ discount\n___order summary___')
+            print('for ordering more than 3 items you get a 5$ discount\n---------------order summary---------------')
             for i in self.order:
                 print(f'your order: {i["item"]}| price: {i["price"]}$', end='   ' )
             print()
             print(f'your total: {total}$\nafter the discount {discount}$ ')
             print(f'the tax for your order is {round(tax,2)}$')
+            print('-----------------------------------------------------')
 
         else:
-            print('___order summary___')
+            print('--------------------order summary------------------')
             for i in self.order:
                 print(f'your order: {i["item"]}| price: {i["price"]}$', end='   ' )
             print()    
             print(f'total: {total}$')
             print(f'the tax for your order is {round(tax,2)}$')
-
+            print('----------------------------------------------------')
 
 prices=[]
 
-pick=None
-
-all=[]
+cart=[]
 
 x=None
 
-while x!='q' :
-    pick=menu[int(input('pick a number that corresponds with the item you would like to order '))]
-    all.append(pick)
-    prices.append(pick['price'])
-    x=input('insert q to quit ')
+while True :
+    print()
+    pick=input('pick the number of the item(s) you want (press q to checkout) ').lower()
+    if pick=='q':
+        break
+    else:
+        cart.append(menu[pick])
+        
+        prices.append(menu[pick]['price'])
 
-order=Check(all,prices)
+order=Check(cart,prices)
 order.calc()
