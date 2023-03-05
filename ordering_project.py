@@ -1,18 +1,16 @@
 
-print('OFFER DAY!!\norder more than 3 items and get a 5$ discount ')
+print('\nOFFER DAY!!\norder more than 3 items and get a 5$ discount ')
 
-print()
-print('__________Menu_____________')
-print('   items        price')
 menu={
-    '1':{'item':'black coffee', 'price':3 },
-    '2':{'item': 'milk coffee' , 'price':4 },
-    '3':{'item' :'chicken sandwich', 'price':5 },
-    '4':{'item':'pepsi', 'price':2 }
+    '1':{'item':'black coffee', 'price':3.65 },
+    '2':{'item': 'milk coffee' , 'price':4.25 },
+    '3':{'item' :'chicken sandwich', 'price':5.35 },
+    '4':{'item':'pepsi', 'price':2.99 }
     }
-
-for i,y in menu.items():
-    print(f'{i}.{y["item"]} | {y["price"]}$')
+print('----------------MENU---------------------------\nitem               price\n')
+for i in menu.values():
+    print(f'{i["item"]:16} | {i["price"]}$')
+print('-----------------------------------------------')
 
 class Check:
     def __init__(self,order,calculate) -> None:
@@ -31,18 +29,18 @@ class Check:
             discount=total - 5
             print('\nfor ordering more than 3 items you get a 5$ discount\n\n-----------------order summary------------------')
             for i in self.order:
-                print(f'item: {i["item"]}| price: ${i["price"]}\n------------------------------------------')
-            print()
-            print(f'your total: {total}$\nafter the discount {discount}$ ')
-            print(f'the tax for your order is {round(tax,2)}$')
+                print(f'item: {i["item"]}| price: ${i["price"]}\n------------------------------------------\n')
+
+            print(f'your total: {total}$\nafter the discount {discount}$ ',2)
+            print(f'the tax for your order is {round(tax,2)}$',2)
             print('-----------------------------------------------------')
 
         else:
             print('\n-------------------order summary-----------------')
             for i in self.order:
-                print(f'item: {i["item"]}| price: ${i["price"]}\n-------------------------------------------')
-            print()    
-            print(f'total: {total}$')
+                print(f'item: {i["item"]}| price: ${i["price"]}\n-------------------------------------------\n')
+            
+            print(f'total: {round(total,2)}$')
             print(f'the tax for your order is {round(tax,2)}$')
             print('----------------------------------------------------')
 
