@@ -27,12 +27,15 @@ class Check:
 
         if len(self.order) > 3: 
             discount=total - 5
-            print('\nfor ordering more than 3 items you get a 5$ discount\n\n-----------------order summary------------------')
+            print('\n--------------------order summary---------------------')
             for i in self.order:
-                print(f'item: {i["item"]}| price: ${i["price"]}\n------------------------------------------\n')
+                print(f'\nitem: {i["item"]}| price: ${i["price"]}\n------------------------------------------')
 
-            print(f'your total: {total}$\nafter the discount {discount}$ ',2)
-            print(f'the tax for your order is {round(tax,2)}$',2)
+            print('\nfor ordering more than 3 items you get a 5$ discount\n')
+
+            print(f'total: {round(total,2)}$\nafter the discount {round(discount,2)}$ ')
+
+            print(f'the tax for your order is {round(tax,2)}$')
             print('-----------------------------------------------------')
 
         else:
