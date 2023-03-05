@@ -29,18 +29,18 @@ class Check:
 
         if len(self.order) > 3: 
             discount=total - 5
-            print('for ordering more than 3 items you get a 5$ discount\n---------------order summary---------------')
+            print('\nfor ordering more than 3 items you get a 5$ discount\n\n-----------------order summary------------------')
             for i in self.order:
-                print(f'your order: {i["item"]}| price: {i["price"]}$', end='   ' )
+                print(f'item: {i["item"]}| price: ${i["price"]}\n------------------------------------------')
             print()
             print(f'your total: {total}$\nafter the discount {discount}$ ')
             print(f'the tax for your order is {round(tax,2)}$')
             print('-----------------------------------------------------')
 
         else:
-            print('--------------------order summary------------------')
+            print('\n-------------------order summary-----------------')
             for i in self.order:
-                print(f'your order: {i["item"]}| price: {i["price"]}$', end='   ' )
+                print(f'item: {i["item"]}| price: ${i["price"]}\n-------------------------------------------')
             print()    
             print(f'total: {total}$')
             print(f'the tax for your order is {round(tax,2)}$')
@@ -53,11 +53,11 @@ cart=[]
 pick=None
 
 while True: 
-    pick=input('pick the number of the item u want (press q to end order) ').lower()
+    pick=input('\npick the number of the item u want (press q to end order) ').lower()
     if pick!='q':
         cart.append(menu[pick])
         prices.append(menu[pick]['price'])
-        
+
     else:
         break
 
