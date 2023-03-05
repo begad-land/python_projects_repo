@@ -2,6 +2,7 @@
 class Question:
     def __init__(self,**kwargs) -> None:
         self.kwargs=kwargs
+        
     def display_Qs(self):
         C_num=0
         A_num=0
