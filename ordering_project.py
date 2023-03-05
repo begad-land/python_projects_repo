@@ -28,7 +28,7 @@ class Check:
         tax = total * 0.12
 
         if len(self.order) > 3: 
-            discount=total-5
+            discount=total - 5
             print('for ordering more than 3 items you get a 5$ discount\n---------------order summary---------------')
             for i in self.order:
                 print(f'your order: {i["item"]}| price: {i["price"]}$', end='   ' )
@@ -50,17 +50,16 @@ prices=[]
 
 cart=[]
 
-x=None
+pick=None
 
-while True :
-    print()
-    pick=input('pick the number of the item(s) you want (press q to checkout) ').lower()
-    if pick=='q':
-        break
-    else:
+while True: 
+    pick=input('pick the number of the item u want (press q to end order) ').lower()
+    if pick!='q':
         cart.append(menu[pick])
-        
         prices.append(menu[pick]['price'])
+        
+    else:
+        break
 
 order=Check(cart,prices)
 order.calc()
