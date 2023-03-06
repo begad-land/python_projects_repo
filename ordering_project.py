@@ -5,9 +5,10 @@ menu={
     '1':{'item':'black coffee', 'price':3.65 },
     '2':{'item': 'milk coffee' , 'price':4.25 },
     '3':{'item' :'chicken sandwich', 'price':5.35 },
-    '4':{'item':'pepsi', 'price':2.99 }
+    '4':{'item':'pepsi', 'price':1.99 },
+    '5':{'item':'Hotdog', 'price':2.45}
     }
-print('----------------MENU---------------------------\nitem               price\n')
+print('----------------MENU---------------------------\nitem                  price\n')
 counter=1
 for i in menu.values():
     print(f'{counter}) {i["item"]:16} | {i["price"]}$')
@@ -21,7 +22,6 @@ class Check:
 
     def calc(self):
 
-    
         total=0
         for i in self.calculate :
             total+=i
@@ -35,9 +35,9 @@ class Check:
 
             print('\nfor ordering more than 3 items you get a 5$ discount\n')
 
-            print(f'total: {round(total,2)}$\nafter the discount {round(discount,2)}$ ')
+            print(f'total: {round(total,2)}$\npost discount: {round(discount,2)}$ ')
 
-            print(f'the tax for your order is {round(tax,2)}$')
+            print(f'order tax: {round(tax,2)}$')
             print('-----------------------------------------------------')
 
         else:
