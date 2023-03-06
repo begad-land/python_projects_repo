@@ -33,17 +33,22 @@ q=Question(questions=(
                       'what is the most abudnant element in the atmosphere',
                       'what is the name of a shape with 7 angles?',
                       'when a living organism makes more of its own, what is this proccess called?',
-                      'what is the name of the species of human beings?',
-                      'in which country is the longest river in the world?'), 
+                      'what is the hardest substance on Earth',
+                      'in which country is the longest river in the world?',
+                      'which planet has the most moons?',
+                      'How many elements in the periodic table?'
+                      ), 
             choices=(
                     ('A. Uranus', 'B. Earth' ,'C. Jupiter', 'D. Mercury'),
                     ('A. French', 'B. English' ,'C. Hindi', 'D. Mandrin Chinese'),
                     ('A.Francium(Fr)', 'B. Oxygen(O2)', 'C. Nitrogen(N2)', 'D.Hydrogen(H)' ), 
                     ('A. Heptagon' , 'B. Octagon', 'C. pentagon' , 'D. Hexagon'),
                     ('A. Reproduction', 'B. Production' , 'C. Increase' , 'D. Reduction'),
-                    ('A. Amphibians', 'B. Homosapiens', 'C. Mammals', 'D.Humans'),
-                    ('A. France' , 'B. Egypt', 'C. U.S.A', 'D.Brazil' )
+                    ('A. Platinum', 'B. Titamnium', 'C. Diamond', 'D. Iron'),
+                    ('A. France' , 'B. Egypt', 'C. U.S.A', 'D.Brazil' ),
+                    ('A. Jupiter', 'B. Mars', 'C. Mercury', 'D. Saturn'),
+                    ('A. 125', 'B. 118', 'C. 117', 'D. 123')
                     ),
-            answers=('A', 'D', 'C' ,'A', 'A', 'B' , 'B')
+            answers=('A', 'D', 'C' ,'A', 'A', 'C' ,'B', 'D', 'B')
             )
 q.display_Qs()
