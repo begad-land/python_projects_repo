@@ -8,8 +8,10 @@ menu={
     '4':{'item':'pepsi', 'price':2.99 }
     }
 print('----------------MENU---------------------------\nitem               price\n')
+counter=1
 for i in menu.values():
-    print(f'{i["item"]:16} | {i["price"]}$')
+    print(f'{counter}) {i["item"]:16} | {i["price"]}$')
+    counter+=1
 print('-----------------------------------------------')
 
 class Check:
@@ -44,7 +46,9 @@ class Check:
                 print(f'item: {i["item"]}| price: ${i["price"]}\n-------------------------------------------\n')
             
             print(f'total: {round(total,2)}$')
+
             print(f'the tax for your order is {round(tax,2)}$')
+
             print('----------------------------------------------------')
 
 prices=[]
@@ -54,7 +58,7 @@ cart=[]
 pick=None
 
 while True: 
-    pick=input('\npick the number of the item u want (press q to end order) ').lower()
+    pick=input('\npick the number of the item u want (enter q to end order) ').lower()
     if pick!='q':
         cart.append(menu[pick])
         prices.append(menu[pick]['price'])
