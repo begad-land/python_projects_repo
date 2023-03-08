@@ -58,13 +58,11 @@ cart=[]
 pick=None
 
 while True: 
-    pick=input('\npick the number of the item u want (enter q to end order) ').lower()
-    if pick!='q':
-        cart.append(menu[pick])
-        prices.append(menu[pick]['price'])
-
-    else:
-        break
+    pick=input('\npick the number of the item u want (click enter to checkout) ').split()
+    for i in pick:
+        cart.append(menu[i])
+        prices.append(menu[i]['price'])
+    break
 
 order=Check(cart,prices)
 order.calc()
