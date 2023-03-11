@@ -25,15 +25,17 @@ class Check:
         total=0
         for i in self.calculate :
             total+=i
-        tax = total * 0.12
+        tax = total * 0.15
 
         if len(self.order) > 3: 
-            discount=total - 5
+            discount_percent= 13 /100 * total
+            discount= total - discount_percent
+
             print('\n--------------------order summary---------------------')
             for i in self.order:
                 print(f'\nitem: {i["item"]}| price: ${i["price"]}\n------------------------------------------')
 
-            print('\nfor ordering more than 3 items you get a 5$ discount\n')
+            print('\nfor ordering more than 3 items you get a 13% discount\n')
 
             print(f'total: {round(total,2)}$\npost discount: {round(discount,2)}$ ')
 
