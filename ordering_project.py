@@ -1,5 +1,5 @@
 
-print('\nOFFER DAY!!\norder more than 3 items and get a 5$ discount ')
+print('\nOFFER DAY!!\norder four or more items for a 13% discount ')
 
 menu={
     '1':{'item':'black coffee', 'price':3.65 },
@@ -25,32 +25,29 @@ class Check:
         total=0
         for i in self.calculate :
             total+=i
-        tax = total * 0.15
 
-        if len(self.order) > 3: 
-            discount_percent= 13 /100 * total
-            discount= total - discount_percent
-
+        if len(self.order) >= 4: 
+            discount_percent= 13 /100 * total 
+            
             print('\n--------------------order summary---------------------')
             for i in self.order:
-                print(f'\nitem: {i["item"]}| price: ${i["price"]}\n------------------------------------------')
+                print(f'\nitem: {i["item"]} | price: ${i["price"]}\n------------------------------------------')
 
-            print('\nfor ordering more than 3 items you get a 13% discount\n')
+            print('13% discount granted \n')
 
-            print(f'total: {round(total,2)}$\npost discount: {round(discount,2)}$ ')
+            print(f'\ntax: {round(tax:=total * 0.15 ,2)}$')
 
-            print(f'order tax: {round(tax,2)}$')
+            print(f'total: {round(dicount:=total-discount_percent,2)}$')
             print('-----------------------------------------------------')
 
         else:
             print('\n-------------------order summary-----------------')
             for i in self.order:
                 print(f'item: {i["item"]}| price: ${i["price"]}\n-------------------------------------------\n')
-            
+
+            print(f'tax: {round(tax,2)}$')
+
             print(f'total: {round(total,2)}$')
-
-            print(f'the tax for your order is {round(tax,2)}$')
-
             print('----------------------------------------------------')
 
 prices=[]
@@ -60,7 +57,8 @@ cart=[]
 pick=None
 
 while True: 
-    pick=input('\npick the number of the item u want (click enter to checkout) ').split()
+    pick=input('\npick the number of the item you want (click enter to checkout) ').split()
+    print(pick)
     for i in pick:
         cart.append(menu[i])
         prices.append(menu[i]['price'])
@@ -68,3 +66,4 @@ while True:
 
 order=Check(cart,prices)
 order.calc()
+print('Enjoy your meal :)')
