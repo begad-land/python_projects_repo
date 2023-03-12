@@ -1,4 +1,4 @@
-
+import functools
 print('\nOFFER DAY!!\norder four or more items for a 13% discount ')
 
 menu={
@@ -25,9 +25,10 @@ class Check:
         total=0
         for i in self.calculate :
             total+=i
+        tax = total * 0.15    
 
         if len(self.order) >= 4: 
-            discount_percent= 13 /100 * total 
+            discount_percentage= 13 /100 * total 
             
             print('\n--------------------order summary---------------------')
             for i in self.order:
@@ -35,9 +36,9 @@ class Check:
 
             print('13% discount granted \n')
 
-            print(f'\ntax: {round(tax:=total * 0.15 ,2)}$')
+            print(f'\ntax: {round(tax,2)}$')
 
-            print(f'total: {round(dicount:=total-discount_percent,2)}$')
+            print(f'total: {round(discount:=total - discount_percentage,2)}$')
             print('-----------------------------------------------------')
 
         else:
@@ -58,7 +59,7 @@ pick=None
 
 while True: 
     pick=input('\npick the number of the item you want (click enter to checkout) ').split()
-    print(pick)
+    
     for i in pick:
         cart.append(menu[i])
         prices.append(menu[i]['price'])
