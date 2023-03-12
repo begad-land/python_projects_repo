@@ -22,9 +22,7 @@ class Check:
 
     def calc(self):
 
-        total=0
-        for i in self.calculate :
-            total+=i
+        total=functools.reduce(lambda x,y: x+y,self.calculate )
         tax = total * 0.15    
 
         if len(self.order) >= 4: 
@@ -34,11 +32,12 @@ class Check:
             for i in self.order:
                 print(f'\nitem: {i["item"]} | price: ${i["price"]}\n------------------------------------------')
 
-            print('13% discount granted \n')
-
-            print(f'\ntax: {round(tax,2)}$')
+            print('13% discount granted\n') 
 
             print(f'total: {round(discount:=total - discount_percentage,2)}$')
+
+            print(f'tax: {round(tax,2)}$')
+
             print('-----------------------------------------------------')
 
         else:
@@ -46,9 +45,10 @@ class Check:
             for i in self.order:
                 print(f'item: {i["item"]}| price: ${i["price"]}\n-------------------------------------------\n')
 
+            print(f'total: {round(total,2)}$')
+
             print(f'tax: {round(tax,2)}$')
 
-            print(f'total: {round(total,2)}$')
             print('----------------------------------------------------')
 
 prices=[]
