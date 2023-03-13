@@ -50,7 +50,7 @@ class Check:
             print(f'tax: {round(tax,2)}$')
 
         when=time.localtime()
-        Time=time.strftime('%B %d %Y %I:%M:%S', when )
+        Time=time.strftime('%B %d %Y %I%p:%M:%S', when )
         print(Time)
         print('----------------------------------------------------')
 
