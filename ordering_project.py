@@ -49,10 +49,11 @@ class Check:
 
             print(f'tax: {round(tax,2)}$')
 
-        print(when:=time.ctime(time.time()))
+        when=time.localtime()
+        Time=time.strftime('%B %d %Y %I:%M:%S', when )
+        print(Time)
         print('----------------------------------------------------')
-        
-            
+
 pick=None
 
 while True: 
