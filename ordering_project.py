@@ -1,3 +1,5 @@
+
+import time
 import functools
 print('\nOFFER DAY!!\norder four or more items for a 13% discount ')
 
@@ -35,36 +37,31 @@ class Check:
             print('13% discount granted\n') 
 
             print(f'total: {round(discount:=total - discount_percentage,2)}$')
-
+            
             print(f'tax: {round(tax,2)}$')
-
-            print('-----------------------------------------------------')
 
         else:
             print('\n-------------------order summary-----------------')
             for i in self.order:
-                print(f'item: {i["item"]}| price: ${i["price"]}\n-------------------------------------------\n')
+                print(f'item: {i["item"]} | price: ${i["price"]}\n-------------------------------------------\n')
 
             print(f'total: {round(total,2)}$')
 
             print(f'tax: {round(tax,2)}$')
 
-            print('----------------------------------------------------')
-
-prices=[]
-
-cart=[]
-
+        print(when:=time.ctime(time.time()))
+        print('----------------------------------------------------')
+        
+            
 pick=None
 
 while True: 
     pick=input('\npick the number of the item you want (click enter to checkout) ').split()
-    
-    for i in pick:
-        cart.append(menu[i])
-        prices.append(menu[i]['price'])
-    break
 
+    cart=[menu[i] for i in pick]
+
+    prices=[menu[i]['price'] for i in pick ]
+    break
 order=Check(cart,prices)
 order.calc()
 print('Enjoy your meal :)')
