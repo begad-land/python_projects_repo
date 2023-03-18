@@ -1,4 +1,5 @@
 
+import pandas
 import time
 import functools
 print('\nOFFER DAY!!\norder four or more items for a 13% discount ')
@@ -11,10 +12,10 @@ menu={
     '5':{'item':'Hotdog', 'price':2.45}
     }
 print('----------------MENU---------------------------\nitem                  price\n')
-counter=1
-for i in menu.values():
-    print(f'{counter}) {i["item"]:16} | {i["price"]}$')
-    counter+=1
+
+for key,value in menu.items():
+    print(f'{key}) {value["item"]:16} | {value["price"]}$')
+
 print('-----------------------------------------------')
 
 class Check:
@@ -43,15 +44,16 @@ class Check:
         else:
             print('\n-------------------order summary-----------------')
             for i in self.order:
-                print(f'item: {i["item"]} | price: ${i["price"]}\n-------------------------------------------\n')
+                print(f'item: {i["item"]} | price: ${i["price"]}\n-------------------------------------------')
 
             print(f'total: {round(total,2)}$')
 
             print(f'tax: {round(tax,2)}$')
 
         when=time.localtime()
+        print('----------------------------------------------------') 
         Time=time.strftime('%B %d %Y %I%p:%M:%S', when )
-        print(Time)
+        print(f'date of order\n{Time}')
         print('----------------------------------------------------')
 
 pick=None
