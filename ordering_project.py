@@ -59,7 +59,7 @@ class Check:
 pick=None
 
 while True: 
-    pick=input('\npick the number of the item you want (click enter to checkout) ').split()
+    pick=input('\npick the number of the item you want (click enter to checkout) ')
 
     cart=[menu[i] for i in pick]
 
