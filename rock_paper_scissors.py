@@ -24,9 +24,6 @@ while True:
         c_score+=1
     if input('play again y/n ') !='y':
         break
-    else:
-        player=None
-        computer=None
-
+    
 print(f'\nyour score: {p_score}\nthe computers score: {c_score}')
 print('thanks for playing')
