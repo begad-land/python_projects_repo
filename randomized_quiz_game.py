@@ -6,7 +6,7 @@ questions={
 
                       'what is the second most spoken language in the world?':(('A. French', 'B. English' ,'C. Hindi', 'D. Mandrin Chinese'),'D'),
                       
-                      'what is the most abudnant element in the atmosphere':(('A.Francium(Fr)', 'B. Oxygen(O2)', 'C. Nitrogen(N2)', 'D.Hydrogen(H)' ),'C'),
+                      'what is the most abudnant element in the atmosphere':(('A. Francium(Fr)', 'B. Oxygen(O2)', 'C. Nitrogen(N2)', 'D. Hydrogen(H)' ),'C'),
 
                       'what is the name of a shape with 7 angles?':(('A. Heptagon' , 'B. Octagon', 'C. pentagon' , 'D. Hexagon'),'A'),
 
@@ -43,7 +43,7 @@ while len(Qs_answered)!=7:
    print(f'{Q_num}) {Qs[0]}\n')
    Q_num+=1
    for i in Qs[1][0]:
-      print(i)
+      print(f'{i}\n----------------------')
 
    guess=input('\npick A/B/C/D ').upper()
 
