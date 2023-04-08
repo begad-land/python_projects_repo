@@ -2,28 +2,16 @@
 import random
 
 class Game:
-    def __init__(self,Q,Qs_saved) -> None:
+    def __init__(self,Q,Qs_saved,score) -> None:
         self.Q=Q
         self.Qs_saved=Qs_saved
+        self.score=score
 
     def display_Qs(self):
-        score=0
-
-        print(f'{self.Qs_saved}) {self.Q[0]}\n------------------------------------------------------')
+        print(f'\n{self.Qs_saved}) {self.Q[0]}\n')
 
         for i in self.Q[1][0]:
-            print(f'{i}\n-------------------------------------- ') 
-
-        guess=input('pick A/B/C/D ').upper()
-
-        if guess==self.Q[1][1]:
-            print(f'correct\n')
-            score+=1
-
-        else:
-            print(f'false the correct answer is: {self.Q[1][1]}\n')
-            
-        
+            print(f'{i}\n') 
 
 s= {
                       'whats the coldest planet in our solar system?':(('A. Uranus', 'B. Earth' ,'C. Jupiter', 'D. Neptune'),'A'),
@@ -50,16 +38,26 @@ s= {
                     }
 
 Qs_saved=[]
+score=0
 while len(Qs_saved) < 7:
     
     randQs=random.choice(list(s.items()))
 
     if randQs in Qs_saved:
         continue
-
+    
     Qs_saved.append(randQs)
 
-    elements=Game(randQs,len(Qs_saved))
-
+    elements=Game(randQs,len(Qs_saved),score)
+    
     elements.display_Qs() 
-print(elements.score)
+
+    guess=input('pick A/B/C/D ').upper()
+
+    if guess==randQs[1][1]:
+        print(f'correct')
+        score+=1
+    else:
+        print(f'wrong the correct answer is {randQs[1][1]}')
+    
+print(f'thanks for playng\nscore:{score}/{len(Qs_saved)}')
