@@ -2,7 +2,7 @@
 import random
 
 class Game:
-    def __init__(self,Q,Qs_saved,score) -> None:
+    def __init__(self,Q,Qs_saved) -> None:
         self.Q=Q
         self.Qs_saved=Qs_saved
         self.score=score
@@ -13,7 +13,7 @@ class Game:
         for i in self.Q[1][0]:
             print(f'{i}\n') 
 
-s= {
+Qs_AND_As= {
                       'whats the coldest planet in our solar system?':(('A. Uranus', 'B. Earth' ,'C. Jupiter', 'D. Neptune'),'A'),
 
                       'what is the second most spoken language in the world?':(('A. French', 'B. English' ,'C. Hindi', 'D. Mandrin Chinese'),'D'),
@@ -34,30 +34,38 @@ s= {
 
                       'What is the country that has the second highest population':(('A. India', 'B. U.S.A', 'C. Indonesia' ,'D. China'), 'A'),
 
-                      'What is the biggest organ in the human body':(('A.Liver', 'B. Brain', 'C. Skin', 'D. Lungs'),'C')
+                      'What is the biggest organ in the human body':(('A.Liver', 'B. Brain', 'C. Skin', 'D. Lungs'),'C'),
+
+                      'which planet in our solar system is called the "Red planet" ':(('A.Mercury','B.Venus','C.Earth','D.Jupiter'),'A')
                     }
 
-Qs_saved=[]
-score=0
-while len(Qs_saved) < 7:
-    
-    randQs=random.choice(list(s.items()))
+while True:
+    Qs_saved=[]
+    score=0
+    while len(Qs_saved) < 7:
+        
+        randQs=random.choice(list(Qs_AND_As.items()))
 
-    if randQs in Qs_saved:
-        continue
-    
-    Qs_saved.append(randQs)
+        if randQs in Qs_saved:
+            continue
+        
+        Qs_saved.append(randQs)
 
-    elements=Game(randQs,len(Qs_saved),score)
-    
-    elements.display_Qs() 
+        elements=Game(randQs,len(Qs_saved))
+        
+        elements.display_Qs() 
 
-    guess=input('pick A/B/C/D ').upper()
+        guess=input('pick A/B/C/D ').upper()
 
-    if guess==randQs[1][1]:
-        print(f'correct')
-        score+=1
-    else:
-        print(f'wrong the correct answer is {randQs[1][1]}')
-    
-print(f'thanks for playng\nscore:{score}/{len(Qs_saved)}')
+        if guess==randQs[1][1]:
+            print(f'correct')
+            score+=1
+        else:
+            print(f'wrong the correct answer is {randQs[1][1]}')
+
+    play_again=input('play again? y/n ').lower()
+
+    if play_again!='y':
+        break
+
+print(f'\nthanks for playng\nscore:{score}/{len(Qs_saved)}') 
