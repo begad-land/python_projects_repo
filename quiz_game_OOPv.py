@@ -38,8 +38,8 @@ Qs_AND_As= {
 
                       'which planet in our solar system is called the "Red planet" ':(('A.Mercury','B.Venus','C.Earth','D.Jupiter'),'A')
                     }
-
-while True:
+play_again=None
+while play_again!='n':
     Qs_saved=[]
     score=0
     while len(Qs_saved) < 7:
@@ -58,14 +58,12 @@ while True:
         guess=input('pick A/B/C/D ').upper()
 
         if guess==randQs[1][1]:
-            print(f'correct')
+            print(f'correct!')
             score+=1
+        
         else:
             print(f'wrong the correct answer is {randQs[1][1]}')
 
     play_again=input('play again? y/n ').lower()
-
-    if play_again!='y':
-        break
 
 print(f'\nthanks for playng\nscore:{score}/{len(Qs_saved)}') 
