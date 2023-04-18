@@ -18,44 +18,51 @@ questions={
 
                       'which planet has the most moons?': (('A. Jupiter', 'B. Mars', 'C. Mercury', 'D. Saturn'),'D'),
 
-                      'How many elements are in the periodic table?':(('A. 125', 'B. 118', 'C. 117', 'D. 123'),'B')
+                      'How many elements are in the periodic table?':(('A. 125', 'B. 118', 'C. 117', 'D. 123'),'B'),
 
+                      'What is the country that has the second highest population':(('A. India', 'B. U.S.A', 'C. Indonesia' ,'D. China'), 'A'),
+
+                      'What is the biggest organ in the human body':(('A.Liver', 'B. Brain', 'C. Skin', 'D. Lungs'),'C')
                     }
+play_again=None
 
+def the_game():
 
-Qs_answered=[]
+   Qs_displayed=[]
 
-Qs_displayed=[]
+   Q_num=1
 
-Q_num=1
+   score=0
 
-score=0
+   while len(Qs_displayed)!=7:
+               
+      Qs=random.choice(list(questions.items()))
 
-while len(Qs_answered)!=7:
-      
-   Qs=random.choice(list(questions.items()))
+      if Qs[0] in Qs_displayed:
+         continue
 
-   if Qs[0] in Qs_displayed:
-      continue
+      Qs_displayed.append(Qs[0])
 
-   Qs_displayed.append(Qs[0])
+      print(f'\n{Q_num}) {Qs[0]}\n')
+      Q_num+=1  
+            
+
+      for i in Qs[1][0]:
+         print(f'{i}\n----------------------')
+
+      guess=input('\npick A/B/C/D ').upper()
+
+      if guess==Qs[1][1]:
+         print(f'correct!')
+         score+=1
+      else:
+         print(f'wrong the answer is: {Qs[1][1]}')
+      print('-------------------------------------------\n') 
+
+   print(f'your score: {score}/{len(Qs_displayed)}')
    
-   print(f'{Q_num}) {Qs[0]}\n')
-   Q_num+=1
-   for i in Qs[1][0]:
-      print(f'{i}\n----------------------')
 
-   guess=input('\npick A/B/C/D ').upper()
-
-
-   Qs_answered.append(guess)
-
-   if guess==Qs[1][1]:
-      print(f'correct!')
-      score+=1
-   else:
-      print(f'wrong the answer is: {Qs[1][1]}' )
-      score - 1
-   print('-------------------------------------------')   
-
-print(f'your score: {score}/{len(Qs_displayed)}')
+while play_again!='n':
+   the_game()
+   play_again=input('\nplay again? (y/n) ')
+print('hello')
