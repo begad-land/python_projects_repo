@@ -29,7 +29,7 @@ class Check:
         tax = total * 0.15    
 
         if len(self.order) >= 4: 
-            discount_percentage= 13 /100 * total 
+            discount_percentage= 13 / 100 * total 
             
             print('\n--------------------order summary---------------------')
             for i in self.order:
@@ -59,7 +59,7 @@ class Check:
 pick=None
 
 while True: 
-    pick=input('\npick the number of the item you want (click enter to checkout) ')
+    pick=input('\npick the number of the item you want (click enter to checkout) ').split()
 
     cart=[menu[i] for i in pick]
 

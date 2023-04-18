@@ -16,6 +16,7 @@ while True:
     if player[0]=='r' and computer[0]=='s' or  player[0]=='p' and computer[0]=='r' or player[0]=='s' and computer[0]=='p':
         print(f'\nthe computer picked {computer} and you picked {player}  \nyou win!')
         p_score+=1
+        
     elif player[0]==computer[0]:
         print(f'\nthe computer picked {computer} and you picked {player}  \nits a tie!')
 
