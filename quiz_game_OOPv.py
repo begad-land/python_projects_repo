@@ -30,7 +30,7 @@ Qs_AND_As= {
 
                       'which planet has the most moons?': (('A. Jupiter', 'B. Mars', 'C. Mercury', 'D. Saturn'),'D','it has rings around it'),
 
-                      'How many elements are in the periodic table?':(('A. 125', 'B. 118', 'C. 117', 'D. 123'),'B','cant hint for that one'),
+                      'How many elements are in the periodic table?':(('A. 125', 'B. 118', 'C. 117', 'D. 123'),'B','cant hint that one'),
 
                       'What is the country that has the second highest population':(('A. India', 'B. U.S.A', 'C. Indonesia' ,'D. China'), 'A','they are asian'),
 
@@ -67,10 +67,10 @@ while play_again!='n':
         if guess==randQs[1][1]:
             print(f'\ncorrect!')
             score+=1
-
+            print('---------------------------------------------------------')
         else:
             print(f'\nwrong the correct answer is {randQs[1][1]}')
-
+            print('---------------------------------------------------------')
     play_again=input('play again? y/n ').lower()
 
 print(f'\nthanks for playng\nscore:{score}/{len(Qs_saved)}') 
