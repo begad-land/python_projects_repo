@@ -36,12 +36,15 @@ Qs_AND_As= {
 
                       'What is the biggest organ in the human body':(('A.Liver', 'B. Brain', 'C. Skin', 'D. Lungs'),'C','its the first line of defense in your immune system'),
 
-                      'which planet in our solar system is called the "Red planet" ':(('A.Mercury','B.Venus','C.Earth','D.Jupiter'),'A','it neighbors earth')
+                      'which planet in our solar system is called the "Red planet" ':(('A.Mars','B.Venus','C.Earth','D.Jupiter'),'A','it neighbors earth')
                     }
 play_again=None
 while play_again!='n':
+
     Qs_saved=[]
+
     score=0
+
     while len(Qs_saved) < 7:
         
         randQs=random.choice(list(Qs_AND_As.items()))
@@ -49,8 +52,6 @@ while play_again!='n':
         if randQs in Qs_saved:
             continue
         
-        
-
         Qs_saved.append(randQs)
 
         elements=Game(randQs,len(Qs_saved))
@@ -59,18 +60,19 @@ while play_again!='n':
 
         guess=input('pick A/B/C/D (insert h for a hint) ').upper()
 
-    
         if guess =='H':
             print(f'{randQs[1][2]}\n')
             guess=input('pick A/B/C/D ').upper()
             
         if guess==randQs[1][1]:
             print(f'\ncorrect!')
-            score+=1
             print('---------------------------------------------------------')
+            score+=1
+            
         else:
             print(f'\nwrong the correct answer is {randQs[1][1]}')
             print('---------------------------------------------------------')
+
     play_again=input('play again? y/n ').lower()
 
-print(f'\nthanks for playng\nscore:{score}/{len(Qs_saved)}') 
+print(f'\nthanks for playng\nscore:{score}/{len(Qs_saved)}')
