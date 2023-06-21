@@ -25,7 +25,7 @@ for i in range(len(names)):
     index+=1
 
 
-with open('text.txt','w') as file:
+with open('text.txt','a') as file:
     for k, v in employees.items():
         file.writelines(f'\nID:{k}\nName: {v[0]}\nPosition: {v[1]}\n-----------------------------------------')
 
