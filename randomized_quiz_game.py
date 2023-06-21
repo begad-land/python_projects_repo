@@ -22,22 +22,28 @@ questions={
 
                       'What is the country that has the second highest population':(('A. India', 'B. U.S.A', 'C. Indonesia' ,'D. China'), 'A','they are asian'),
 
-                      'What is the biggest organ in the human body':(('A.Liver', 'B. Brain', 'C. Skin', 'D. Lungs'),'C','its the first line of defense in your immune system'),
+                      'What is the biggest organ in the human body':(('A. Liver', 'B. Brain', 'C. Skin', 'D. Lungs'),'C','its the first line of defense in your immune system'),
 
-                      'which planet in our solar system is called the "Red planet" ':(('A.Mercury','B.Venus','C.Earth','D.Jupiter'),'A','it neighbors earth')
-                    }
+                      'which planet in our solar system is called the "Red planet" ':(('A. Mars','B. Venus','C. Earth','D. Jupiter'),'A','it neighbors earth')
+            }
+
 play_again=None
 
+
 def the_game():
-
+   #if u want to the user to not get rerpeated questions when they insert y in the play again var (play another round) then you will need to place the Qs_dsiplayed var outside the function so it does not 
+   #get emptied each time the func is called and you must put a lot of new questions into the questions var so there can be available questions after like 2 rounds of playing for example
+   #you made one update to the code which is u added a bew var called players_answers and this var is a measurment to the hwne the round shoukd end (when its len equals 7)
+   #you had that task covered with Qs_displayed var but if u want to acheive whats in the first 2 lines of comments the Qs_displayed len wont get reset back to 0 since it would be outside the function 
+   #to keep the Qs_displayed saved while the user is playing so questions dont get repeated while the user plays each round
    Qs_displayed=[]
-
    Q_num=1
 
    score=0
 
-   while len(Qs_displayed)!=7:
-               
+   players_answers=[]
+   while len(players_answers)!=7:
+       
       Qs=random.choice(list(questions.items()))
 
       if Qs[0] in Qs_displayed:
@@ -53,7 +59,7 @@ def the_game():
          print(f'{i}\n----------------------')
 
       guess=input('\npick A/B/C/D (insert h for a hint) ').upper()
-
+      players_answers.append(guess)
 
       if guess=='H':
          print(f'{Qs[1][2]}')
@@ -63,14 +69,15 @@ def the_game():
          print(f'correct!')
          score+=1
 
-      else:
+      else: 
          print(f'wrong the answer is: {Qs[1][1]}')
-      print('-------------------------------------------\n') 
+      print('------------------------------------------------\n') 
 
    print(f'your score: {score}/{len(Qs_displayed)}')
    
 
 while play_again!='n':
    the_game()
-   play_again=input('\nplay again? (y/n) ')
-print('hello')
+   play_again=input('\nplay again? (y/n) ').lower()
+   print('---------------------------------------------------')
+print('thanks for playing :)')
