@@ -1,4 +1,5 @@
 
+# sourcery skip: dict-comprehension, list-comprehension, move-assign-in-block, sum-comprehension
 import time
 import pandas as pd
 
@@ -29,10 +30,10 @@ items_and_prices=[]
 item_rep_and_price={}
 
 
-for item_chosen in items_chosen:
-    items_and_prices.append([item_chosen.loc['item'],item_chosen.loc['price']])
-
-
+items_and_prices.extend(
+    [item_chosen.loc['item'], item_chosen.loc['price']]
+    for item_chosen in items_chosen
+)
 for data_from_items_and_prices_var in items_and_prices:
     item_rep_and_price[data_from_items_and_prices_var[0]] = [ (items_and_prices.count(data_from_items_and_prices_var)) , data_from_items_and_prices_var[1] ]
 
@@ -53,19 +54,19 @@ if len(items_chosen) >= 4:
 
     for key, value in item_rep_and_price.items():
         print(f'item: {key} {value[0]}X | price: {value[1]}\n---------------------------------------------------')
-   
+
     print(f'10% offer granted!\ntotal: {round(total - discounted_percentage,2)}\ntax: {round(tax,2)}$ ')
 
 
 else:
-    
+
     for key, value in item_rep_and_price.items():
         print(f'item: {key} {value[0]}X | price: {value[1]}$\n-------------------------------- ')
-        
+
     print(f'total: {round(total,2)} \ntax: {round(tax,2)}$')
 
 when=time.localtime()
-print('----------------------------------------------------') 
+print('----------------------------------------------------')
 Time=time.strftime('%B %d %Y %I%p:%M:%S', when )
 print(f'date of the order:\n{Time}')
 print('----------------------------------------------------')
