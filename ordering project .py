@@ -32,7 +32,7 @@ class Check:
 
         print('\n-------------------------order summary-----------------------\n')
 
-        if self.amount <= 4:
+        if self.amount >= 4:
             print(f'10% discount granted!\n')
             for key, value in self.order.items():
                 print(f'Item: {key} {value[1]}X | Price: {value[0]}$\n----------------------------------------------')
