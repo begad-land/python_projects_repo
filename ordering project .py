@@ -7,7 +7,8 @@ menu={
     '3':{'item' :'Chicken sandwich', 'price':5.35 },
     '4':{'item':'Pepsi', 'price':1.99 },
     '5':{'item':'Hotdog', 'price':2.45},
-    '6':{'item': 'Lemonade', 'price': 1.36}
+    '6':{'item': 'Lemonade', 'price': 1.36},
+    '7':{'item':'Ice Cream','price':3.47},
     }
 print('-------------------MENU---------------------------\n item                   price\n')
 
@@ -61,7 +62,7 @@ while True:
     pick=input('\npick the number of the item u want (click enter to checkout) ').split()
 
     for i in pick:
-      cart[menu[i]['item']]=[round(menu[i]['price'] *pick.count(i),2) ,pick.count(i)]  
+      cart[menu[i]['item']]=[round(menu[i]['price'] * pick.count(i),2) ,pick.count(i)]  
       items.append(menu[i]['item'])
       
     break
