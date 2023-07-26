@@ -42,7 +42,7 @@ def the_game():
    score=0
 
    players_answers=[]
-   while len(players_answers)!=7:
+   while Q_num !=8:
        
       Qs=random.choice(list(questions.items()))
 
@@ -57,13 +57,15 @@ def the_game():
 
       for i in Qs[1][0]:
          print(f'{i}\n----------------------')
-
       guess=input('\npick A/B/C/D (insert h for a hint) ').upper()
-      players_answers.append(guess)
+
 
       if guess=='H':
          print(f'{Qs[1][2]}')
          guess=input('\npick A/B/C/D ').upper()
+
+      if guess!='H':
+         players_answers.append(guess)
 
       if guess==Qs[1][1]:
          print(f'correct!')
