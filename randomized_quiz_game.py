@@ -18,7 +18,7 @@ questions={
 
                       'which planet has the most moons?': (('A. Jupiter', 'B. Mars', 'C. Mercury', 'D. Saturn'),'D','it has rings around it'),
 
-                      'How many elements are in the periodic table?':(('A. 125', 'B. 118', 'C. 117', 'D. 123'),'B','cant hint for that one'),
+                      'How many elements are in the periodic table?':(('A. 125', 'B. 118', 'C. 117', 'D. 123'),'B','cant hint that one'),
 
                       'What is the country that has the second highest population':(('A. India', 'B. U.S.A', 'C. Indonesia' ,'D. China'), 'A','they are asian'),
 
@@ -64,8 +64,7 @@ def the_game():
          print(f'{Qs[1][2]}')
          guess=input('\npick A/B/C/D ').upper()
 
-      if guess!='H':
-         players_answers.append(guess)
+      players_answers.append(guess)
 
       if guess==Qs[1][1]:
          print(f'correct!')
@@ -75,7 +74,7 @@ def the_game():
          print(f'wrong the answer is: {Qs[1][1]}')
       print('------------------------------------------------\n') 
 
-   print(f'your score: {score}/{len(Qs_displayed)}')
+   print(f'your score: {score}/{Q_num}')
    
 
 while play_again!='n':
