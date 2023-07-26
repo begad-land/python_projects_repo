@@ -35,7 +35,7 @@ items_and_prices.extend(
     for item_chosen in items_chosen
 )
 for data_from_items_and_prices_var in items_and_prices:
-    item_rep_and_price[data_from_items_and_prices_var[0]] = [ (items_and_prices.count(data_from_items_and_prices_var)) , data_from_items_and_prices_var[1] ]
+    item_rep_and_price[data_from_items_and_prices_var[0]] = [ (items_and_prices.count(data_from_items_and_prices_var)) , data_from_items_and_prices_var[1] * items_and_prices.count (data_from_items_and_prices_var) ]
 
 
 
