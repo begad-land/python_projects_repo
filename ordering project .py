@@ -2,13 +2,26 @@ import time
 print('\nOFFER DAY!!\norder 4 items or more to get 10% off your order ')
 
 menu={
-    '1':{'item':'Black coffee', 'price':3.65 },
-    '2':{'item': 'Milk coffee' , 'price':4.25 },
-    '3':{'item' :'Chicken sandwich', 'price':5.35 },
-    '4':{'item':'Pepsi', 'price':1.99 },
-    '5':{'item':'Hotdog', 'price':2.45},
-    '6':{'item': 'Lemonade', 'price': 1.36},
-    '7':{'item':'Ice Cream','price':3.47},
+    '1':{'item':'Black coffee', 
+        'price':3.65 },
+
+    '2':{'item': 'Milk coffee' ,
+        'price':4.25 },
+
+    '3':{'item' :'Chicken sandwich', 
+        'price':5.35 },
+
+    '4':{'item':'Pepsi', 
+        'price':1.99 },
+        
+    '5':{'item':'Hotdog', 
+        'price':2.45},
+
+    '6':{'item': 'Lemonade', 
+        'price': 1.36},
+
+    '7':{'item':'Ice Cream', 
+        'price':3.47},
     }
 print('-------------------MENU---------------------------\n item                   price\n')
 
