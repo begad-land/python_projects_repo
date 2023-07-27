@@ -5,14 +5,14 @@ import pandas as pd
 
 menu={
 
-   'item':['black coffe','milk coffee','chicken sandwich','pepsi','hotdog'],   
-   'price':[3.65 , 4.25 , 5.35 , 1.99 , 2.45 ],
+   'item':['black coffe','milk coffee','chicken sandwich','pepsi','hotdog','Ice Cream'],   
+   'price':[3.65 , 4.25 , 5.35 , 1.99 , 2.45, 3.47 ],
 
     }
 
 df_menu=pd.DataFrame(menu)
 
-df_menu.index=[1,2,3,4,5]
+df_menu.index=[1,2,3,4,5,6]
 
 print('------------------menu--------------------------')
 
