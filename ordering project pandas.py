@@ -7,7 +7,6 @@ menu={
 
    'item':['black coffe','milk coffee','chicken sandwich','pepsi','hotdog','Ice Cream'],   
    'price':[3.65 , 4.25 , 5.35 , 1.99 , 2.45, 3.47 ],
-
     }
 
 df_menu=pd.DataFrame(menu)
