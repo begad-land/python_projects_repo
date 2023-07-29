@@ -25,8 +25,8 @@ menu={
 print('-------------------MENU---------------------------\n item                   price\n')
 
 counter=1
-for i in menu.values():
-    print(f'| {counter}) {i["item"]:16} | {i["price"]:1}$ |')
+for pick in menu.values():
+    print(f'| {counter}) {pick["item"]:16} | {pick["price"]:1}$ |')
 
     counter+=1
 print('-----------------------------------------------')
@@ -69,13 +69,18 @@ items=[]
 cart={}
 
 while True: 
-    pick=list(input('\npick the number of the item u want (click enter to checkout) ').split())
+    picks=list(input('\npick the number of the item u want (click enter to checkout) ').split())
+    sizes=list(input('pick a size depending on the order if your items (L/M/S)').split())
 
-    for i in pick:
-      cart[menu[i]['item']]=[round(menu[i]['price'] * pick.count(i),2) ,pick.count(i)]  
-      items.append(menu[i]['item'])
+    for pick in picks:
+      if pick not in menu:
+          continue
       
+      cart[menu[pick]['item']]=[round(menu[pick]['price'] * picks.count(pick),2) ,picks.count(pick)]  
+      items.append(menu[pick]['item'])
+
     break
 
+#have the sizes in a list and allign with each item using a an index var 
 order=Check(cart,len(items))
 order.calc()
