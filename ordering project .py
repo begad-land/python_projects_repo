@@ -1,6 +1,5 @@
 import time
 print('\nOFFER DAY!!\norder 4 items or more to get 10% off your order ')
-
 menu={
     '1':{'item':'Black coffee', 
         'price':3.65 },
@@ -50,13 +49,13 @@ class Check:
             print(f'10% discount granted!\n')
             for key, value in self.order.items():
                 print(f'Item: {key} {value[1]}X | Price: {value[0]}$\n----------------------------------------------')
-            print(f'Total: {round(total - discounted_percentage,2)}\nTax: {round(tax,2)}')
+            print(f'\nTotal: {round(total - discounted_percentage,2)}\nTax: {round(tax,2)}')
 
         else:
             for key, value in self.order.items():
                 print(f'Item: {key} {value[1]}X | Price {value[0]}$\n----------------------------------------------')
-            print(f'Total: {round(total,2)}\nTax: {round(tax,2)}')
-        
+            print(f'\nTotal: {round(total,2)}\nTax: {round(tax,2)}')
+        print()
         when=time.localtime()
         print('----------------------------------------------------') 
         Time=time.strftime('%B %d %Y %I%p:%M:%S', when )
