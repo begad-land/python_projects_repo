@@ -68,10 +68,8 @@ items=[]
 
 cart={}
 
-pick=[]
-
 while True: 
-    pick=input('\npick the number of the item u want (click enter to checkout) ').split()
+    pick=list(input('\npick the number of the item u want (click enter to checkout) ').split())
 
     for i in pick:
       cart[menu[i]['item']]=[round(menu[i]['price'] * pick.count(i),2) ,pick.count(i)]  
