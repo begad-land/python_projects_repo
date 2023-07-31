@@ -1,6 +1,7 @@
 #this is temporary. if a user picks the same item more than once but with diffrent sizes try to append that items size inside the dict "cart"
 
 import time
+
 print('\nOFFER DAY!!\norder 4 items or more to get 10% off your order ')
 menu={
     '1':{'item':'Black coffee', 
@@ -34,10 +35,11 @@ for pick in menu.values():
 print('======================================================')
 
 class Check:
-    def __init__(self,order,items,sizes) -> None:
+    def __init__(self,order,items, items_and_sizes) -> None:
         self.order=order
         self.items=items
-        self.sizes=sizes
+        self.items_and_sizes=items_and_sizes
+        
 
     def calc(self):
         total=0
@@ -55,14 +57,16 @@ class Check:
             print(f'\nTotal: {round(total - discounted_percentage,2)}\nTax: {round(tax,2)}\n===================================')
 
         else:
+            index=0
             for key, value in self.order.items():
-                print(f'Item: {key:16} {value[1]}X | Price {value[0]}$\n===========================================================')
-            print(f'\nTotal: {round(total,2)}\nTax: {round(tax,2)}\n============================================================')
-        print()
-        for i , s in zip(self.items, self.sizes):
-            print(f'items: {i:16} | sizes: {s}')
+                print(f'Item: {key:16} {value[1]:1}X | Price: {value[0]:7}$ | \n===========================================================')
+                
+            for i in items_and_sizes:
+                print(f'\nitem: {i[0]:16} | size: {i[1]}\n---------------------------------------------------------')
 
-        print('=================================================')
+            print(f'\nTotal: {round(total,2)}\nTax: {round(tax,2)}\n============================================================')
+        print() 
+
         when=time.localtime()
         Time=time.strftime('%B %d %Y %I%p:%M:%S', when )
         print(f'date of the order:\n{Time}')
@@ -74,19 +78,23 @@ items=[]
 cart={}
 
 while True: 
-    picks=list(input('\npick the number of the item u want (click enter to checkout) ').split())
+    picks=list(input('\npick the number of the item u want (click enter to choose the size you want) ').split())
     sizes=list(input('pick a size depending on the order of your items (L/M/S)').upper().split())
 
     for pick in picks:
       if pick not in menu:
           continue
+      
         
-      cart[menu[pick[0]]['item']] = [round(menu[pick[0]]['price'] * picks.count(pick),2) , picks.count(pick)]
+      cart[menu[pick]['item']] = [round(menu[pick[0]]['price'] * picks.count(pick),2) , picks.count(pick),  ]
 
-      items.append(menu[pick[0]]['item'])
-
+      items.append(menu[pick]['item'])
     break
 
+items_and_sizes=zip(items,sizes)
 
-order=Check(cart, items,sizes)
+
+
+
+order=Check(cart,items, items_and_sizes)
 order.calc()
