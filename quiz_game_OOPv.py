@@ -17,7 +17,7 @@ Qs_AND_As= {
                       'whats the coldest planet in our solar system?':(('A. Uranus', 'B. Earth' ,'C. Jupiter', 'D. Neptune'),'A','its the 7th planet in the solar system'),
 
                       'what is the second most spoken language in the world?':(('A. French', 'B. English' ,'C. Hindi', 'D. Mandrin Chinese'),'D','its asian'),
-                      
+
                       'what is the most abudnant element in the atmosphere':(('A. Francium(Fr)', 'B. Oxygen(O2)', 'C. Nitrogen(N2)', 'D. Hydrogen(H)' ),'C','its used to put out fires '),
 
                       'whats the name of the island thats also a continent?':(('A. Australia' , 'B. Austria', 'C.Bora Bora' , 'D. Hawaii'),'A','its knwon for the kangroos'),
@@ -51,11 +51,11 @@ while play_again!='n':
 
         if randQs in Qs_saved:
             continue
-        
+
         Qs_saved.append(randQs)
 
         elements=Game(randQs,len(Qs_saved))
-        
+
         elements.display_Qs() 
 
         guess=input('pick A/B/C/D (insert h for a hint) ').upper()
@@ -63,16 +63,14 @@ while play_again!='n':
         if guess =='H':
             print(f'{randQs[1][2]}\n')
             guess=input('pick A/B/C/D ').upper()
-            
+
         if guess==randQs[1][1]:
             print(f'\ncorrect!')
-            print('---------------------------------------------------------')
             score+=1
-            
+
         else:
             print(f'\nwrong the correct answer is {randQs[1][1]}')
-            print('---------------------------------------------------------')
-
+        print('---------------------------------------------------------')
     play_again=input('play again? y/n ').lower()
 
 print(f'\nthanks for playng\nscore:{score}/{len(Qs_saved)}')
