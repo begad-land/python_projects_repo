@@ -18,10 +18,8 @@ while True:
         letters1.append(symbol)    
     
     password = [random.choice(letters1) for x in range(8)]
+    password=''.join(password)
 
-    for i in symbols:
-        if i not in password:
-            continue
-        
-    print(''.join(password))
+    print(password)    
+    #print(''.join(password))
     time.sleep(6)
