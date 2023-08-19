@@ -83,10 +83,9 @@ while True:
 
     for pick in picks:
       if pick not in menu:
-          continue
-      
+          continue     
         
-      cart[menu[pick]['item']] = [round(menu[pick[0]]['price'] * picks.count(pick),2) , picks.count(pick),  ]
+      cart[menu[pick]['item']] = [round(menu[pick]['price'] * picks.count(pick),2) , picks.count(pick),  ]
 
       items.append(menu[pick]['item'])
     break
