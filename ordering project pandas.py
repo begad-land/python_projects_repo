@@ -1,71 +1,67 @@
 
-# sourcery skip: dict-comprehension, list-comprehension, move-assign-in-block, sum-comprehension
-import time
+import time as tm
 import pandas as pd
 
+
+
+class Total:
+    def __init__(self,lst_prices=[]) -> None:
+        self.lst_prices=lst_prices
+        self.total_bill=0
+
+    def calc_total(self):
+        for price in self.lst_prices:
+            self.total_bill+=price
+        return self.total_bill
+
+class Items:
+    def __init__(self,lst_items=[]) -> None:
+        self.lst_items=lst_items
+
+
+
+class Invoice:
+    def __init__(self,order) -> None:
+        self.order=order
+        self.total=Total(self.order[k][0] for k, v in self.order.items())
+        self.items=Items(self.order[k] for k in self.order)
+        
+
+    def invoice_presentaion(self):
+        print()
+        for k, v in self.order.items():
+            print(f'Item: {k:5} {v[1]}X | Price: {v[0]}$\n\n------------------------------------------')
+
+        print(f'Total:{round(self.total.calc_total(),2)}$\n------------------------------------------')
+        when=tm.localtime()
+        Time=tm.strftime('%B %d %Y %I%p:%M:%S', when )
+        print(f'date of the order:\n{Time}')    
+
+           
+
 menu={
-
-   'item':['black coffe','milk coffee','chicken sandwich','pepsi','hotdog','Ice Cream'],   
-   'price':[3.65 , 4.25 , 5.35 , 1.99 , 2.45, 3.47 ],
+    'foods':['pizza','steak','burger','Mango juice','mushroom soup'],
+    'prices':[5.36, 30.15 ,10.45, 4.25, 15.75],
     }
+menu_df=pd.DataFrame(menu)
+menu_df.index=['1','2','3','4','5']
 
-df_menu=pd.DataFrame(menu)
+print(f'-------------MENU-----------\n{menu_df}')
+lst_of_nums=['1','2','3','4','5']
 
-df_menu.index=[1,2,3,4,5,6]
+order={}
 
-print('------------------menu--------------------------')
+while True:
+    picks=list(input('-----------------------------\ninsert the number of the item that you want ').split())
 
-print(f'{df_menu}\n-------------------------------------------------')
+    for pick in picks:
+        if pick not in lst_of_nums:
+            continue
 
-#collecting the data
+        order[menu_df.loc[pick]['foods']]=[
+                                          round(menu_df.loc[pick]['prices'] * picks.count(pick),2), picks.count(pick)
+                                          ] 
+    break
 
-order=input('\npick the number that corresponds to the item you want ').split()
-
-
-items_chosen=[df_menu.loc[int(num)] for num in order ]
-
-items_and_prices=[]
-
-item_rep_and_price={}
-
-
-items_and_prices.extend(
-    [item_chosen.loc['item'], item_chosen.loc['price']]
-    for item_chosen in items_chosen
-)
-for data_from_items_and_prices_var in items_and_prices:
-    item_rep_and_price[data_from_items_and_prices_var[0]] = [ (items_and_prices.count(data_from_items_and_prices_var)) , data_from_items_and_prices_var[1] * items_and_prices.count (data_from_items_and_prices_var) ]
-
-
-
-print('\n------------------order summary-----------------------\n')
-
-#order summary
-
-total=0
-for item in items_chosen:
-    total+=item.loc['price']
-tax= total * 0.15  
-
-if len(items_chosen) >= 4:
-    #10% discount
-    discounted_percentage= 10 / 100 * total
-
-    for key, value in item_rep_and_price.items():
-        print(f'item: {key} {value[0]}X | price: {value[1]}\n---------------------------------------------------')
-
-    print(f'10% offer granted!\ntotal: {round(total - discounted_percentage,2)}\ntax: {round(tax,2)}$ ')
-
-
-else:
-
-    for key, value in item_rep_and_price.items():
-        print(f'item: {key} {value[0]}X | price: {value[1]}$\n-------------------------------- ')
-
-    print(f'total: {round(total,2)} \ntax: {round(tax,2)}$')
-
-when=time.localtime()
-print('----------------------------------------------------')
-Time=time.strftime('%B %d %Y %I%p:%M:%S', when )
-print(f'date of the order:\n{Time}')
-print('----------------------------------------------------')
+invoice=Invoice(order)
+invoice.invoice_presentaion()
