@@ -38,7 +38,7 @@ class Invoice:
             print(f'10% DISCOUNT GRANTED!')
             print(f'Total: {round(self.total.calc_total() - discounted_percentage),2}$\n------------------------------------------')
         else:
-            print(f'Total: {round(self.total.calc_total(),2)}$\n------------------------------------------')
+            print(f'Total: {round(self.total.calc_total()),2}$\n------------------------------------------')
 
         print(f'fees: {round(fees),2}$')
         when=tm.localtime()
