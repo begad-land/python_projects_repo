@@ -92,8 +92,5 @@ while True:
 
 items_and_sizes=zip(items,sizes)
 
-
-
-
 order=Check(cart,items, items_and_sizes)
 order.calc()
