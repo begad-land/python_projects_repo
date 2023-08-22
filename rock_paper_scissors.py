@@ -19,7 +19,7 @@ while play_again=='Y':
 
     while player_choice not in options:
         player_choices.remove(player_choice)
-        player_choice=input('Enter Rock/Paper/Scissors (Rock/Paper/Scissors) ').capitalize()
+        player_choice=input('Enter Rock/Paper/Scissors ').capitalize()
         player_choices.append(player_choice)
 
     computer_choice=rd.choice(options)
