@@ -14,7 +14,7 @@ computer_score=0
 while play_again=='Y':
     print(f'\n--------ROUND: {round}--------')
     round+=1
-    player_choice=input('Enter Rock/Paper/Scissors (Rock/Paper/Scissors) ').capitalize()
+    player_choice=input('Enter Rock/Paper/Scissors ').capitalize()
     player_choices.append(player_choice)
 
     while player_choice not in options:
