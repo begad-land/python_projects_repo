@@ -1,32 +1,51 @@
-import random
+import random as rd 
 
-choices=['rock','paper','scissors']
+computer_choices=[]
 
-p_score=0
+options=['Rock','Paper','Scissors']
 
-c_score=0
-while True:
-    computer=random.choice(choices)
-    player=input('pick (rock/ paper / scissors ) ').lower()
-    print('----------------------------------------------------------')
+player_choices=[]
 
+play_again='Y'
+round=1
+player_score=0
+computer_score=0
 
-    while player not in choices:
-        player=input('pick (rock/ paper / scissors ) ')
+while play_again=='Y':
+    print(f'\n--------ROUND: {round}--------')
+    round+=1
+    player_choice=input('Enter Rock/Paper/Scissors (Rock/Paper/Scissors) ').capitalize()
+    player_choices.append(player_choice)
 
-    if player[0]=='r' and computer[0]=='s' or  player[0]=='p' and computer[0]=='r' or player[0]=='s' and computer[0]=='p':
-        print(f'\nthe computer picked {computer}\nyou picked {player}  \nyou win!')
-        p_score+=1
-        
-    elif player[0]==computer[0]:
-        print(f'\nthe computer picked {computer}\nyou picked {player}  \nits a tie!')
+    while player_choice not in options:
+        player_choices.remove(player_choice)
+        player_choice=input('Enter Rock/Paper/Scissors (Rock/Paper/Scissors) ').capitalize()
+        player_choices.append(player_choice)
+
+    computer_choice=rd.choice(options)
+    computer_choices.append(computer_choice)
+
+    if player_choice[0]=='R' and computer_choice[0]=='S' or player_choice[0]=='S' and computer_choice[0]=='P' or player_choice[0]=='P' and computer_choice[0]=='R':
+        print('YOU WIN!')
+        player_score+=1
+
+    elif player_choice[0]==computer_choice[0]:
+        print('DRAW')
 
     else:
-        print(f'\nthe computer picked {computer}\nyou picked {player}  \nyou lose!')
-        c_score+=1
-    if input('play again y/n ') !='y':
-        break
-    print('------------------------------------------------------------------')
-    
-print(f'\nyour score: {p_score}\nthe computers score: {c_score}')
-print('thanks for playing')
+        print('YOU LOSE!')
+        computer_score+=1
+
+    print(f'the computer picked: {computer_choice}')
+    print('--------------------------------------------------')
+    play_again=input('play again? (Y/N)').upper()
+
+    if play_again!='Y':
+        play_again=='N'
+round=1
+
+for player, computer in zip(player_choices,computer_choices):
+    print(f'---------------round: {round}---------------\nYou: {player}\nComputer: {computer}')
+    round+=1
+
+print(f'----------------\nYour score: {player_score}\nComputer score: {computer_score}')
