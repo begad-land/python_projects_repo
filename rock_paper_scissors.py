@@ -42,7 +42,7 @@ while play_again=='Y':
 
     if play_again!='Y':
         play_again=='N'
-        
+
 round=1
 for player, computer in zip(player_choices,computer_choices):
     print(f'---------------round: {round}---------------\nYou: {player}\nComputer: {computer}')
