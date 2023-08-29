@@ -10,7 +10,7 @@ class Total:
     def calc_total(self):
         for price in self.lst_prices:
             self.total_bill+=price
-        return self.total_bill
+        return round(self.total_bill,2)
 
 class Items:
     def __init__(self,lst_items=[]) -> None:
@@ -38,9 +38,9 @@ class Invoice:
             print(f'10% DISCOUNT GRANTED!')
             print(f'Total: {round(self.total.calc_total() - discounted_percentage),2}$\n------------------------------------------')
         else:
-            print(f'Total: {round(self.total.calc_total()),2}$\n------------------------------------------')
+            print(f'Total: {self.total.calc_total()}$\n------------------------------------------')
 
-        print(f'fees: {round(fees),2}$')
+        print(f'fees: {round(fees,2)}$')
         when=tm.localtime()
         Time=tm.strftime('%B %d %Y %I%p:%M:%S', when )
         print(f'date of the order:\n{Time}')    
