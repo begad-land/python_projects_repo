@@ -19,7 +19,7 @@ class Items:
 class Invoice:
     def __init__(self,order) -> None:
         self.order=order
-        self.total=Total(self.order[k][0] for k, v in self.order.items())
+        self.total=Total(v[0] for k, v in self.order.items())
         self.items=Items(self.order[k] for k in self.order)
         
     def invoice_presentaion(self):
@@ -36,7 +36,7 @@ class Invoice:
         if amount_of_items >= 4:
             discounted_percentage= 10 / 100 * self.total.calc_total()
             print(f'10% DISCOUNT GRANTED!')
-            print(f'Total: {round(self.total.calc_total() - discounted_percentage),2}$\n------------------------------------------')
+            print(f'Total: {round(self.total.calc_total() - discounted_percentage,2)}$\n------------------------------------------')
         else:
             print(f'Total: {self.total.calc_total()}$\n------------------------------------------')
 
