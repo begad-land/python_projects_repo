@@ -36,11 +36,11 @@ class Invoice:
         if amount_of_items >= 4:
             discounted_percentage= 10 / 100 * self.total.calc_total()
             print(f'10% DISCOUNT GRANTED!')
-            print(f'Total: {round(self.total.calc_total() - discounted_percentage),2}$\n------------------------------------------')
+            print(f'Total: {round(self.total.calc_total() - discounted_percentage,2)}$\n------------------------------------------')
         else:
-            print(f'Total: {round(self.total.calc_total()),2}$\n------------------------------------------')
+            print(f'Total: {round(self.total.calc_total(),2)}$\n------------------------------------------')
 
-        print(f'fees: {round(fees),2}$')
+        print(f'fees: {round(fees,2)}$')
         when=tm.localtime()
         Time=tm.strftime('%B %d %Y %I%p:%M:%S', when )
         print(f'date of the order:\n{Time}')    
