@@ -21,5 +21,4 @@ while True:
     password=''.join(password)
 
     print(password)    
-    #print(''.join(password))
     time.sleep(6)

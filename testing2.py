@@ -38,7 +38,7 @@ class Invoice:
             print(f'10% DISCOUNT GRANTED!')
             print(f'Total: {round(self.total.calc_total() - discounted_percentage,2)}$\n------------------------------------------')
         else:
-            print(f'Total: {round(self.total.calc_total()),2}$\n------------------------------------------')
+            print(f'Total: {self.total.calc_total()}$\n------------------------------------------')
 
         print(f'fees: {round(fees,2)}$')
         when=tm.localtime()
@@ -49,26 +49,60 @@ menu={
     'foods':['pizza','steak','burger','Mango juice','mushroom soup'],
     'prices':[5.36, 30.15 ,10.45, 4.25, 15.75],
     }
+
+sizes=['L','M','S']
+
+
+
 menu_df=pd.DataFrame(menu)
 menu_df.index=['1','2','3','4','5']
 
 print(f'-------------MENU-----------\n{menu_df}')
 
 lst_of_nums=['1','2','3','4','5']
-
 order={}
+
+items=[]
+prices=[]
+amount=[]
+
 
 while True:
     picks=list(input('-----------------------------\ninsert the number of the item that you want ').split())
+
+
+
+    sizes_picked=list(input('insert sizes ').upper().split())
 
     for pick in picks:
         if pick not in lst_of_nums:
             continue
 
-        order[menu_df.loc[pick]['foods']]=[
-                                          round(menu_df.loc[pick]['prices'] * picks.count(pick),2), picks.count(pick)
-                                          ] 
+        items.append(menu_df.loc[pick]['foods'])
+        prices.append(menu_df.loc[pick]['prices'])
+        amount.append(picks.count(pick))
+        order={
+              'Item':items,
+              'Price':prices,
+              'size':sizes,
+              }
+
     break
 
-invoice=Invoice(order)
-invoice.invoice_presentaion()
+order_df=pd.DataFrame(order)
+
+print(order_df)
+
+
+
+#order2={
+        #'items':items,
+        #'prices':prices,
+        #'sizes':sizes_picked,
+        #'amount':amount
+       #
+
+
+#invoice=Invoice(order)
+#invoice.invoice_presentaion()
+
