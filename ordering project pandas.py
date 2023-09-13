@@ -2,6 +2,7 @@
 import time as tm
 import pandas as pd
 
+#calculating the total
 class Total:
     def __init__(self,lst_prices=[]) -> None:
         self.lst_prices=lst_prices
@@ -11,11 +12,13 @@ class Total:
         for price in self.lst_prices:
             self.total_bill+=price
         return round(self.total_bill,2)
-
+    
+#gathering the items
 class Items:
     def __init__(self,lst_items=[]) -> None:
         self.lst_items=lst_items
 
+#creating and presenting the elements of the invoice
 class Invoice:
     def __init__(self,order) -> None:
         self.order=order
