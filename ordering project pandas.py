@@ -27,7 +27,7 @@ class Pay:
         print(f'1)cash\n2)debit\n ')
 
         method=input('how would you like to pay? ')
-
+        
         if method in ['1', 'cash']:
             self.cash.cash_status()
 
