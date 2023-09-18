@@ -93,6 +93,7 @@ lst_of_nums=['1','2','3','4','5']
 
 order={}
 
+#try to move this chunk of code into the Items class############################################
 while True:
     picks=list(input('-----------------------------\ninsert the number of the item that you want ').split())
 
@@ -104,7 +105,7 @@ while True:
                                           round(menu_df.loc[pick]['prices'] * picks.count(pick),2), picks.count(pick)
                                           ] 
     break
-
+###################################################################################################
 pay=Pay()
 pay.getting_payment_method()
 
