@@ -1,4 +1,5 @@
 
+import pandas as pd
 import random as rn
 
 names=[]
@@ -21,7 +22,7 @@ while True:
 names.remove('')
 
 for name in names:
-    id=rn.randint(1000,9999)
+    id=rn.randint(1000,99999)
     employees[id]=[names[index],positions[index]]
     index+=1
 
