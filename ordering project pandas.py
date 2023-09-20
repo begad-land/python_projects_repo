@@ -3,35 +3,38 @@ import time as tm
 import pandas as pd
 
 menu={
-    'foods':['pizza','steak','burger','Mango juice','mushroom soup'],
+    'foods':['Pizza','Steak','Burger','Mango','soup'],
     'prices':[5.36, 30.15 ,10.45, 4.25, 15.75],
     }
 menu_df=pd.DataFrame(menu)
 menu_df.index=['1','2','3','4','5']
 
-print(f'-------------MENU-----------\n{menu_df}')
+print(f'---------MENU---------\n{menu_df}')
 
 lst_of_nums=['1','2','3','4','5']
 
 class TakingOrder:
-    def __init__(self,order={}) -> None:
+    def __init__(self,order={},) -> None:
         self.order=order
 
     def taking_the_order(self):
-        
         while True:
             picks=list(input('-----------------------------\ninsert the number of the item that you want ').split())
+            print()
 
             for pick in picks:
                 if pick not in lst_of_nums:
                     continue
-                self.order[menu_df.loc[pick]['foods']]=[
-                                                            round(menu_df.loc[pick]['prices'] * picks.count(pick),2), picks.count(pick)
-                                                        ]
-            break
-        return self.order
+                self.order[menu_df.loc[pick]['foods']]={
+                        'Price': menu_df.loc[pick]['prices'] * picks.count(pick),
+                        'Quantity':picks.count(pick),
+                }
+            break   
 
-    
+    def getting_DF(self):
+        return pd.DataFrame(self.order)
+
+
 #calculate anything that needs calculation in the invoice class
 class Calculations:
     def __init__(self, discount=0 , Qnt=0 , total=0 , fees=0 ) -> None:
@@ -43,7 +46,7 @@ class Calculations:
     
     def calc_total(self):
         for price in self.takingorder.order.values():
-            self.total+=price[0]
+            self.total+=price['Price']
 
         return round(self.total,2)
         
@@ -60,7 +63,7 @@ class Calculations:
     
     def quantity(self):
         for i in self.takingorder.order.values():
-            self.Qnt+=i[1]
+            self.Qnt+=i['Quantity']
 
         return self.Qnt
 
@@ -70,8 +73,8 @@ class Invoice:
        self.calculations=Calculations()
 
     def invoice_presentaion(self):
-        for k, v in self.takingorder.order.items():
-            print(f'Item: {k:7} {v[1]}X | Price: ${v[0]}\n---------------------------------------------')
+
+        print(f'{self.takingorder.getting_DF()}\n---------------------------------------------')
 
         if self.calculations.quantity() >= 4:
             print(f'12% DISCOUNT GRANTED!')
