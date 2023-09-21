@@ -3,15 +3,14 @@ import time as tm
 import pandas as pd
 
 menu={
-    'foods':['Pizza','Steak','Burger','Mango','soup'],
-    'prices':[5.36, 30.15 ,10.45, 4.25, 15.75],
+    'foods':['Pizza','Steak','Burger','Mango','Soup','Sausage'],
+    'prices':[6.36, 30.15 ,10.45, 4.25, 15.75, 3.30],
     }
+
 menu_df=pd.DataFrame(menu)
-menu_df.index=['1','2','3','4','5']
+menu_df.index=['1','2','3','4','5','6']
 
 print(f'---------MENU---------\n{menu_df}')
-
-lst_of_nums=['1','2','3','4','5']
 
 class TakingOrder:
     def __init__(self,order={},) -> None:
@@ -23,13 +22,13 @@ class TakingOrder:
             print()
 
             for pick in picks:
-                if pick not in lst_of_nums:
+                if pick not in ['1','2','3','4','5','6']:
                     continue
                 self.order[menu_df.loc[pick]['foods']]={
                         'Price': menu_df.loc[pick]['prices'] * picks.count(pick),
                         'Quantity':picks.count(pick),
                 }
-            break   
+            break
 
     def getting_DF(self):
         return pd.DataFrame(self.order)
