@@ -85,7 +85,7 @@ class Invoice:
 
         print(f'Fees: {self.calculations.calc_fees()}\n---------------------------------------------')
         when=tm.localtime()
-        Time=tm.strftime('%B %d %Y %I%p:%M:%S', when )
+        Time=tm.strftime('%B %d/%Y %I%p:%M:%S', when )
         print(f'date of the order:\n{Time}')      
 
 x=TakingOrder()
