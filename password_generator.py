@@ -3,12 +3,15 @@
 import random
 import string
 import time
+import re
 
 letters1=list(string.ascii_uppercase)
 
 nums=['1','2','3','4','5','6','7','8','9']
 
-symbols=['@','$','!','&','*']
+symbols=['@','$','&','*','#']
+
+pattern=re.compile(r'[0-9]+[A-Z]+[^A-Za-z0-9]{1,2}')
 
 while True:
     for i in nums:
@@ -16,9 +19,14 @@ while True:
 
     for symbol in symbols:
         letters1.append(symbol)    
+
     
-    password = [random.choice(letters1) for x in range(8)]
+    password = [random.choice(letters1) for x in range(9)]
     password=''.join(password)
+
+    if pattern.search(password) is None:
+        continue
+
 
     print(password)    
     time.sleep(6)
