@@ -30,7 +30,7 @@ class TakingOrder:
                 }
             break
 
-    def getting_DF(self):
+    def order_DF(self):
         return pd.DataFrame(self.order)
 
 
@@ -73,7 +73,7 @@ class Invoice:
 
     def invoice_presentaion(self):
 
-        print(f'{self.takingorder.getting_DF()}\n---------------------------------------------')
+        print(f'{self.takingorder.order_DF()}\n---------------------------------------------')
 
         if self.calculations.quantity() >= 4:
             print(f'12% DISCOUNT GRANTED!')
