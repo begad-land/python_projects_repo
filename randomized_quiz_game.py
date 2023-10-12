@@ -1,6 +1,47 @@
 
 import random
 
+class PickedQ:
+    def __init__(self,random_pick, Q , choices, answer,hint) -> None:
+      self.random_pick=random_pick
+      self.Q=Q
+      self.choices=choices
+      self.answer=answer
+      self.hint=hint
+
+   
+
+    def picking_Q(self):
+      self.random_pick = random.choice(list(questions.items()))
+
+    def getting_Question(self):
+       self.Q = self.random_pick[0]
+       return self.Q
+       
+    def getting_Question(self):
+       self.choices = self.random_pick[1][0]
+       return self.choices
+    
+    def getting_Question(self):
+       self.answer = self.random_pick[1][1]
+       return self.answer
+    
+    def getting_hint(self):
+       self.hint = self.random_pick[1][2]
+       return self.hint
+
+   
+
+class Play:
+   def __init__(self) -> None:
+      self.pickedq=PickedQ(questions)
+
+   def display(self):
+      pass
+         
+   
+
+
 questions={
                       'whats the coldest planet in our solar system?':(('A. Uranus', 'B. Earth' ,'C. Jupiter', 'D. Neptune'),'A','its the 7th planet in the solar system'),
 
@@ -30,55 +71,57 @@ questions={
 play_again=None
 
 
-def the_game():
-   #if u want to the user to not get rerpeated questions when they insert y in the play again var (play another round) then you will need to place the Qs_dsiplayed var outside the function so it does not 
-   #get emptied each time the func is called and you must put a lot of new questions into the questions var so there can be available questions after like 2 rounds of playing for example
-   #you made one update to the code which is u added a bew var called players_answers and this var is a measurment to the hwne the round shoukd end (when its len equals 7)
-   #you had that task covered with Qs_displayed var but if u want to acheive whats in the first 2 lines of comments the Qs_displayed len wont get reset back to 0 since it would be outside the function 
-   #to keep the Qs_displayed saved while the user is playing so questions dont get repeated while the user plays each round
-   Qs_displayed=[]
-   Q_num=1
+#function is doing too much:
+# 1)picks random question | 2)displays questions | 3)displays hint | 4)checks if answer is correct | 5)calculates score | 6)checks if user wants to play again
+#compostiton
 
-   score=0
 
-   players_answers=[]
-   while Q_num !=8:
+#def the_game():
+
+ #  Qs_displayed=[]
+  # Q_num=1
+
+  # score=0
+
+   #players_answers=[]
+   #while Q_num !=8:
        
-      Qs=random.choice(list(questions.items()))
+     # Qs=random.choice(list(questions.items()))
 
-      if Qs[0] in Qs_displayed:
-         continue
+     # if Qs[0] in Qs_displayed:
+      #   continue
 
-      Qs_displayed.append(Qs[0])
+     # Qs_displayed.append(Qs[0])
 
-      print(f'\n{Q_num}) {Qs[0]}\n')
-      Q_num+=1  
+    #  print(f'\n{Q_num}) {Qs[0]}\n')
+   #   Q_num+=1  
             
 
-      for i in Qs[1][0]:
-         print(f'{i}\n----------------------')
-      guess=input('\npick A/B/C/D (insert h for a hint) ').upper()
+  #    for i in Qs[1][0]:
+ #        print(f'{i}\n----------------------')
+#      guess=input('\npick A/B/C/D (insert h for a hint) ').upper()
 
+#
+#      if guess=='H':
+ #        print(f'{Qs[1][2]}')
+ #        guess=input('\npick A/B/C/D ').upper()
+#
+ #     players_answers.append(guess)
 
-      if guess=='H':
-         print(f'{Qs[1][2]}')
-         guess=input('\npick A/B/C/D ').upper()
+#      if guess==Qs[1][1]:
+      #   print(f'correct!')
+     #    score+=1
 
-      players_answers.append(guess)
+    #  else: 
+   #      print(f'wrong the answer is: {Qs[1][1]}')
+  #    print('------------------------------------------------\n') 
 
-      if guess==Qs[1][1]:
-         print(f'correct!')
-         score+=1
-
-      else: 
-         print(f'wrong the answer is: {Qs[1][1]}')
-      print('------------------------------------------------\n') 
-
-   print(f'your score: {score}/{Q_num}')
+ #  print(f'your score: {score}/{Q_num}')
    
 
-while play_again!='n':
-   the_game()
-   play_again=input('\nplay again? (y/n) ').lower()
-   print('---------------------------------------------------')
+#while play_again!='n':
+   #the_game()
+   #play_again=input('\nplay again? (y/n) ').lower()
+   #print('---------------------------------------------------')
 print('thanks for playing :)')
+
