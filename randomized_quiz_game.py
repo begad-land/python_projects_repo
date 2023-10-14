@@ -1,45 +1,80 @@
 
 import random
 
-class PickedQ:
-    def __init__(self,random_pick, Q , choices, answer,hint) -> None:
+class PickedSet:
+    def __init__(self,random_pick, Q=None, choices=None, answer=None, hint=None) -> None:
       self.random_pick=random_pick
       self.Q=Q
       self.choices=choices
       self.answer=answer
       self.hint=hint
 
-   
-
-    def picking_Q(self):
+    def picking_set(self):
       self.random_pick = random.choice(list(questions.items()))
+      return self.random_pick
 
-    def getting_Question(self):
-       self.Q = self.random_pick[0]
-       return self.Q
+    def getting_Q(self):
+      self.Q = self.random_pick[0]
+      return self.Q 
        
-    def getting_Question(self):
+    def getting_choices(self):
        self.choices = self.random_pick[1][0]
        return self.choices
     
-    def getting_Question(self):
-       self.answer = self.random_pick[1][1]
-       return self.answer
+    def getting_answer(self):
+      self.answer = self.random_pick[1][1]
+      return self.answer
     
     def getting_hint(self):
-       self.hint = self.random_pick[1][2]
-       return self.hint
+      self.hint = self.random_pick[1][2]
+      return self.hint
 
-   
 
 class Play:
-   def __init__(self) -> None:
-      self.pickedq=PickedQ(questions)
+    def __init__(self,questions) -> None:
+      self.questions=questions
+      #you are passing the questions var to the random_pick attribute so it can then get its random value in the picking_Q function so if u call the attribute without
+      #alone it will give u what u passed to it which is the entire questions var. so you either call the version of the var that the function returns or you call the picking_set func before th display func
+      self.pickedset=PickedSet(questions)
 
-   def display(self):
-      pass
-         
-   
+    
+
+    def display(self):
+      
+      answered_Qs=[]
+      Q_num=1
+
+      while len(answered_Qs) != 7: 
+        self.pickedset.picking_set()
+
+        if self.pickedset.getting_Q() in answered_Qs:
+            continue
+        
+        print(f'{Q_num}) {self.pickedset.getting_Q()}')
+        Q_num+=1
+
+        answered_Qs.append(self.pickedset.getting_Q())
+
+        for choice in self.pickedset.getting_choices():
+          print(choice)
+        
+        player_answer=input('Insert A/B/C/D (H for a hint) ').upper()
+        print()
+        self.correction(player_answer)
+
+    
+    def correction(self,player_answer):
+        if player_answer=='H':
+          print(self.pickedset.getting_hint())
+          player_answer=input('Insert A/B/C/D ').upper()
+
+        if player_answer==self.pickedset.getting_answer():
+          print(f'correct!')
+          score = 0 + 1
+
+        else:
+          print(f'incorrect\nanswer: {self.pickedset.getting_answer()}')
+        print('---------------------------------------')
 
 
 questions={
@@ -49,7 +84,7 @@ questions={
                       
                       'what is the most abudnant element in the atmosphere':(('A. Francium(Fr)', 'B. Oxygen(O2)', 'C. Nitrogen(N2)', 'D. Hydrogen(H)' ),'C','its used to put out fires '),
 
-                      'whats the name of the island thats also a continent?':(('A. Australia' , 'B. Austria', 'C.Bora Bora' , 'D. Hawaii'),'A','its knwon for the kangroos'),
+                      'whats the name of the island thats also a continent?':(('A. Australia' , 'B. Austria', 'C. Bora Bora' , 'D. Hawaii'),'A','its knwon for the kangroos'),
 
                       'the second biggest country in the world?':(('A. Canada', 'B. Russia' , 'C. U.S.A' , 'D. India'),'A','they play a lot of hockey'),
 
@@ -76,52 +111,8 @@ play_again=None
 #compostiton
 
 
-#def the_game():
 
- #  Qs_displayed=[]
-  # Q_num=1
-
-  # score=0
-
-   #players_answers=[]
-   #while Q_num !=8:
-       
-     # Qs=random.choice(list(questions.items()))
-
-     # if Qs[0] in Qs_displayed:
-      #   continue
-
-     # Qs_displayed.append(Qs[0])
-
-    #  print(f'\n{Q_num}) {Qs[0]}\n')
-   #   Q_num+=1  
-            
-
-  #    for i in Qs[1][0]:
- #        print(f'{i}\n----------------------')
-#      guess=input('\npick A/B/C/D (insert h for a hint) ').upper()
-
-#
-#      if guess=='H':
- #        print(f'{Qs[1][2]}')
- #        guess=input('\npick A/B/C/D ').upper()
-#
- #     players_answers.append(guess)
-
-#      if guess==Qs[1][1]:
-      #   print(f'correct!')
-     #    score+=1
-
-    #  else: 
-   #      print(f'wrong the answer is: {Qs[1][1]}')
-  #    print('------------------------------------------------\n') 
-
- #  print(f'your score: {score}/{Q_num}')
-   
-
-#while play_again!='n':
-   #the_game()
-   #play_again=input('\nplay again? (y/n) ').lower()
-   #print('---------------------------------------------------')
+play=Play(questions)
+play.display()
 print('thanks for playing :)')
 
