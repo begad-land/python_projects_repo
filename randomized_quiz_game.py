@@ -1,4 +1,4 @@
-
+answered_Qs=[]
 import random
 
 class PickedSet:
@@ -31,17 +31,17 @@ class PickedSet:
 
 
 class Play:
-    def __init__(self,questions) -> None:
+    def __init__(self,questions,score=0) -> None:
       self.questions=questions
       #you are passing the questions var to the random_pick attribute so it can then get its random value in the picking_Q function so if u call the attribute without
       #alone it will give u what u passed to it which is the entire questions var. so you either call the version of the var that the function returns or you call the picking_set func before th display func
       self.pickedset=PickedSet(questions)
+      self.score=score
 
-    
+
 
     def display(self):
       
-      answered_Qs=[]
       Q_num=1
 
       while len(answered_Qs) != 7: 
@@ -70,11 +70,12 @@ class Play:
 
         if player_answer==self.pickedset.getting_answer():
           print(f'correct!')
-          score = 0 + 1
+          self.score +=1
 
         else:
           print(f'incorrect\nanswer: {self.pickedset.getting_answer()}')
-        print('---------------------------------------')
+        print('---------------------------------------')  
+
 
 
 questions={
@@ -106,13 +107,10 @@ questions={
 play_again=None
 
 
-#function is doing too much:
-# 1)picks random question | 2)displays questions | 3)displays hint | 4)checks if answer is correct | 5)calculates score | 6)checks if user wants to play again
-#compostiton
-
-
+#make the play again feature | try to make it a differnt function
 
 play=Play(questions)
 play.display()
+print(f'score: {play.score}')
 print('thanks for playing :)')
 
