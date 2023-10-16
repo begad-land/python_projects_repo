@@ -39,25 +39,29 @@ class Play:
       self.score=score
 
 
-
-    def display(self):
-      
+    def display_Question(self):
       Q_num=1
-
-      while len(answered_Qs) != 7: 
+      while True:
+      
         self.pickedset.picking_set()
 
         if self.pickedset.getting_Q() in answered_Qs:
             continue
         
         print(f'{Q_num}) {self.pickedset.getting_Q()}')
-        Q_num+=1
-
         answered_Qs.append(self.pickedset.getting_Q())
+        Q_num+=1
 
         for choice in self.pickedset.getting_choices():
           print(choice)
-        
+
+        if len(answered_Qs) == 7:
+          break
+
+
+        self.taking_answer()
+
+    def taking_answer(self):
         player_answer=input('Insert A/B/C/D (H for a hint) ').upper()
         print()
         self.correction(player_answer)
@@ -110,7 +114,8 @@ play_again=None
 #make the play again feature | try to make it a differnt function
 
 play=Play(questions)
-play.display()
+play.display_Question()
+play.taking_answer()
 print(f'score: {play.score}')
 print('thanks for playing :)')
 
