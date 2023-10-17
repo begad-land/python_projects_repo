@@ -1,3 +1,4 @@
+
 answered_Qs=[]
 import random
 
@@ -31,17 +32,19 @@ class PickedSet:
 
 
 class Play:
-    def __init__(self,questions,score=0) -> None:
+    def __init__(self,questions,score=0,play_again=True) -> None:
       self.questions=questions
       #you are passing the questions var to the random_pick attribute so it can then get its random value in the picking_Q function so if u call the attribute without
       #alone it will give u what u passed to it which is the entire questions var. so you either call the version of the var that the function returns or you call the picking_set func before th display func
       self.pickedset=PickedSet(questions)
       self.score=score
+      self.play_again=play_again
 
 
     def display_Question(self):
       Q_num=1
-      while True:
+
+      while self.play_again==True:
       
         self.pickedset.picking_set()
 
@@ -56,15 +59,17 @@ class Play:
           print(choice)
 
         if len(answered_Qs) == 7:
-          break
-
-
+          self.PLAY_AGAIN()
+    
         self.taking_answer()
+
+
 
     def taking_answer(self):
         player_answer=input('Insert A/B/C/D (H for a hint) ').upper()
         print()
         self.correction(player_answer)
+
 
     
     def correction(self,player_answer):
@@ -79,6 +84,15 @@ class Play:
         else:
           print(f'incorrect\nanswer: {self.pickedset.getting_answer()}')
         print('---------------------------------------')  
+
+
+    def PLAY_AGAIN(self):
+        ask=input('would you like to play again (Y/N) ').upper()
+        if ask=='N':
+            return
+
+        answered_Qs.clear()
+        self.display_Question()
 
 
 
@@ -108,7 +122,7 @@ questions={
                       'which planet in our solar system is called the "Red planet" ':(('A. Mars','B. Venus','C. Earth','D. Jupiter'),'A','it neighbors earth')
             }
 
-play_again=None
+
 
 
 #make the play again feature | try to make it a differnt function
