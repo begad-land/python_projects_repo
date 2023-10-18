@@ -34,8 +34,6 @@ class PickedSet:
 class Play:
     def __init__(self,questions,score=0,play_again=True) -> None:
       self.questions=questions
-      #you are passing the questions var to the random_pick attribute so it can then get its random value in the picking_Q function so if u call the attribute without
-      #alone it will give u what u passed to it which is the entire questions var. so you either call the version of the var that the function returns or you call the picking_set func before th display func
       self.pickedset=PickedSet(questions)
       self.score=score
       self.play_again=play_again
@@ -51,18 +49,17 @@ class Play:
         if self.pickedset.getting_Q() in answered_Qs:
             continue
         
-        print(f'{Q_num}) {self.pickedset.getting_Q()}')
+        print(f'{Q_num}) {self.pickedset.getting_Q()}\n-------------------------------------------------------')
         answered_Qs.append(self.pickedset.getting_Q())
         Q_num+=1
 
         for choice in self.pickedset.getting_choices():
           print(choice)
 
-        if len(answered_Qs) == 7:
-          self.PLAY_AGAIN()
-    
         self.taking_answer()
 
+        if len(answered_Qs) == 7:
+          self.PLAY_AGAIN()
 
 
     def taking_answer(self):
@@ -82,15 +79,19 @@ class Play:
           self.score +=1
 
         else:
-          print(f'incorrect\nanswer: {self.pickedset.getting_answer()}')
-        print('---------------------------------------')  
-
+          print(f'incorrect\nanswer: {self.pickedset.getting_answer()}')  
+        print('-------------------------------------------------------\n\n')
 
     def PLAY_AGAIN(self):
-        ask=input('would you like to play again (Y/N) ').upper()
+        print(f'score: {self.score}\n-------------------------------------------------------\n')
+        self.score=0
+        ask=input('would you like to play again? (Y/N) ').upper()
+        print('-------------------------------------------------------')
+        print()
         if ask=='N':
-            return
-
+            print(f'Thanks for playing :)')
+            exit()
+        
         answered_Qs.clear()
         self.display_Question()
 
@@ -122,14 +123,7 @@ questions={
                       'which planet in our solar system is called the "Red planet" ':(('A. Mars','B. Venus','C. Earth','D. Jupiter'),'A','it neighbors earth')
             }
 
-
-
-
-#make the play again feature | try to make it a differnt function
-
 play=Play(questions)
 play.display_Question()
 play.taking_answer()
-print(f'score: {play.score}')
-print('thanks for playing :)')
 
