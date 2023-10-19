@@ -78,12 +78,12 @@ class Invoice:
         if self.calculations.quantity() >= 4:
             print(f'12% DISCOUNT GRANTED!')
             self.calculations.calc_total()
-            print(f'Total: {self.calculations.calc_discount()}')
+            print(f'Total: ${self.calculations.calc_discount()}')
 
         else:
-            print(f'Total: {self.calculations.calc_total()}')
+            print(f'Total: ${self.calculations.calc_total()}')
 
-        print(f'Fees: {self.calculations.calc_fees()}\n---------------------------------------------')
+        print(f'Fees: ${self.calculations.calc_fees()}\n---------------------------------------------')
         when=tm.localtime()
         Time=tm.strftime('%B %d/%Y %I%p:%M:%S', when )
         print(f'date of the order:\n{Time}')      
