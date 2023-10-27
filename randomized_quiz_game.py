@@ -1,5 +1,5 @@
 
-answered_Qs=[]
+#answered_Qs=[]
 import random
 
 class PickedSet:
@@ -32,12 +32,13 @@ class PickedSet:
 
 
 class Play:
-    def __init__(self,questions,score=0,play_again=True) -> None:
+    def __init__(self,questions,score=0,play_again=True,answered_Qs=[]) -> None:
+      
       self.questions=questions
       self.pickedset=PickedSet(questions)
       self.score=score
       self.play_again=play_again
-
+      self.answered_Qs=answered_Qs
 
     def display_Question(self):
       Q_num=1
@@ -46,11 +47,11 @@ class Play:
       
         self.pickedset.picking_set()
 
-        if self.pickedset.getting_Q() in answered_Qs:
+        if self.pickedset.getting_Q() in self.answered_Qs:
             continue
         
         print(f'{Q_num}) {self.pickedset.getting_Q()}\n-------------------------------------------------------')
-        answered_Qs.append(self.pickedset.getting_Q())
+        self.answered_Qs.append(self.pickedset.getting_Q())
         Q_num+=1
 
         for choice in self.pickedset.getting_choices():
@@ -58,7 +59,7 @@ class Play:
 
         self.taking_answer()
 
-        if len(answered_Qs) == 7:
+        if len(self.answered_Qs) == 7:
           self.PLAY_AGAIN()
 
 
@@ -79,7 +80,7 @@ class Play:
           self.score +=1
 
         else:
-          print(f'incorrect\nanswer: {self.pickedset.getting_answer()}')  
+            print(f'incorrect\nanswer: {self.pickedset.getting_answer()}')  
         print('-------------------------------------------------------\n\n')
 
     def PLAY_AGAIN(self):
@@ -91,9 +92,12 @@ class Play:
         if ask=='N':
             print(f'Thanks for playing :)')
             exit()
-        
-        answered_Qs.clear()
-        self.display_Question()
+        self.reset()
+
+
+    def reset(self):
+          self.answered_Qs.clear()
+          self.display_Question()
 
 
 
