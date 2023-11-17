@@ -1,5 +1,4 @@
 
-#answered_Qs=[]
 import random
 
 class PickedSet:
