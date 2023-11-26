@@ -38,13 +38,15 @@ class Play:
       self.play_again=play_again
       self.answered_Qs=answered_Qs
 
+    #has a while loop that keeps going for as long as the play_again var is true. it calls the method picking_set to able to use the vars that make up the questions
+    #it appends the questions shown in the answered_Qs var,prints the choices and calls taking answer function. might wanna lessen its responsabilities a lil could make a different function call the picked_set method
     def display_Question(self):
       Q_num=1
 
       while self.play_again==True:
       
         self.pickedset.picking_set()
-        
+
         if self.pickedset.Q in self.answered_Qs:
             continue
         
