@@ -45,15 +45,19 @@ class Play:
       while self.play_again==True:
       
         self.pickedset.picking_set()
+        self.pickedset.getting_Q()
+        self.pickedset.getting_choices()
+        self.pickedset.getting_answer()
+        self.pickedset.getting_hint()
 
-        if self.pickedset.getting_Q() in self.answered_Qs:
+        if self.pickedset.Q in self.answered_Qs:
             continue
         
-        print(f'{Q_num}) {self.pickedset.getting_Q()}\n-------------------------------------------------------')
-        self.answered_Qs.append(self.pickedset.getting_Q())
+        print(f'{Q_num}) {self.pickedset.Q}\n-------------------------------------------------------')
+        self.answered_Qs.append(self.pickedset.Q)
         Q_num+=1
 
-        for choice in self.pickedset.getting_choices():
+        for choice in self.pickedset.choices:
           print(choice)
 
         self.taking_answer()
@@ -71,15 +75,15 @@ class Play:
     
     def correction(self,player_answer):
         if player_answer=='H':
-          print(self.pickedset.getting_hint())
+          print(self.pickedset.hint)
           player_answer=input('Insert A/B/C/D ').upper()
 
-        if player_answer==self.pickedset.getting_answer():
+        if player_answer==self.pickedset.answer:
           print(f'correct!')
           self.score +=1
 
         else:
-            print(f'incorrect\nanswer: {self.pickedset.getting_answer()}')  
+            print(f'incorrect\nanswer: {self.pickedset.answer}')  
         print('-------------------------------------------------------\n\n')
 
     def PLAY_AGAIN(self):
