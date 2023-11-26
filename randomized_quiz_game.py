@@ -11,23 +11,22 @@ class PickedSet:
 
     def picking_set(self):
       self.random_pick = random.choice(list(questions.items()))
-      return self.random_pick
+      self.getting_Q()
 
     def getting_Q(self):
       self.Q = self.random_pick[0]
-      return self.Q 
+      self.getting_choices() 
        
     def getting_choices(self):
        self.choices = self.random_pick[1][0]
-       return self.choices
+       self.getting_answer()
     
     def getting_answer(self):
       self.answer = self.random_pick[1][1]
-      return self.answer
+      self.getting_hint()
     
     def getting_hint(self):
       self.hint = self.random_pick[1][2]
-      return self.hint
 
 
 class Play:
@@ -45,11 +44,7 @@ class Play:
       while self.play_again==True:
       
         self.pickedset.picking_set()
-        self.pickedset.getting_Q()
-        self.pickedset.getting_choices()
-        self.pickedset.getting_answer()
-        self.pickedset.getting_hint()
-
+        
         if self.pickedset.Q in self.answered_Qs:
             continue
         
