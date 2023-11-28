@@ -44,14 +44,15 @@ class Play:
       Q_num=1
 
       while self.play_again==True:
-      
+        
         self.pickedset.picking_set()
-
         if self.pickedset.Q in self.answered_Qs:
             continue
+        self.answered_Qs.append(self.pickedset.Q)
+
+        
         
         print(f'{Q_num}) {self.pickedset.Q}\n-------------------------------------------------------')
-        self.answered_Qs.append(self.pickedset.Q)
         Q_num+=1
 
         for choice in self.pickedset.choices:
