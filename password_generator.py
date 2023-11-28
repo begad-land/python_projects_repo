@@ -12,7 +12,7 @@ nums=['1','2','3','4','5','6','7','8','9']
 symbols=['@','$','&','*','#']
 
 
-pattern=re.compile(r'[0-9]+[A-Z]+[@#%&*]{1,3}')
+pattern=re.compile(r'[0-9]+[A-Z]+[@#%&*]{1,4}')
 
 while True:
     for i in nums:
