@@ -30,28 +30,38 @@ class PickedSet:
 
 
 class Play:
-    def __init__(self,questions,score=0,play_again=True,answered_Qs=[]) -> None:
+    def __init__(self,questions,score=0,answered_Qs=[]) -> None:
       
       self.questions=questions
       self.pickedset=PickedSet(questions)
       self.score=score
-      self.play_again=play_again
       self.answered_Qs=answered_Qs
 
-    #has a while loop that keeps going for as long as the play_again var is true. it calls the method picking_set to able to use the vars that make up the questions
-    #it appends the questions shown in the answered_Qs var,prints the choices and calls taking answer function. might wanna lessen its responsabilities a lil could make a different function call the picked_set method
+    
+
+       
+    def checking_Q(self):
+         self.pickedset.picking_set()
+
+         if self.pickedset.Q in self.answered_Qs:
+            return True
+         
+         self.answered_Qs.append(self.pickedset.Q)
+
+    def checking_round(self):
+       if len(self.answered_Qs) == 7:
+          self.PLAY_AGAIN()
+       
+    #prints out the question and the choices. calls checking_Q function to check if the question is repeated, calls the taking answer to store the user's answer and calls the 
+    #checking round function after each cycle to check if the round is over
     def display_Question(self):
       Q_num=1
 
-      while self.play_again==True:
-        
-        self.pickedset.picking_set()
-        if self.pickedset.Q in self.answered_Qs:
-            continue
-        self.answered_Qs.append(self.pickedset.Q)
+      while True:
 
-        
-        
+        if self.checking_Q()==True:
+           continue
+
         print(f'{Q_num}) {self.pickedset.Q}\n-------------------------------------------------------')
         Q_num+=1
 
@@ -60,18 +70,17 @@ class Play:
 
         self.taking_answer()
 
-        if len(self.answered_Qs) == 7:
-          self.PLAY_AGAIN()
+        self.checking_round()
 
-
+        
     def taking_answer(self):
         player_answer=input('Insert A/B/C/D (H for a hint) ').upper()
         print()
         self.correction(player_answer)
 
 
-    
     def correction(self,player_answer):
+        
         if player_answer=='H':
           print(self.pickedset.hint)
           player_answer=input('Insert A/B/C/D ').upper()
@@ -84,21 +93,23 @@ class Play:
             print(f'incorrect\nanswer: {self.pickedset.answer}')  
         print('-------------------------------------------------------\n\n')
 
+
     def PLAY_AGAIN(self):
         print(f'score: {self.score}\n-------------------------------------------------------\n')
-        self.score=0
         ask=input('would you like to play again? (Y/N) ').upper()
         print('-------------------------------------------------------')
         print()
         if ask=='N':
             print(f'Thanks for playing :)')
             exit()
-        self.reset()
+        self.reset_game()
 
 
-    def reset(self):
+    def reset_game(self):
           self.answered_Qs.clear()
+          self.score=0
           self.display_Question()
+          
 
 
 
