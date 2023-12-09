@@ -37,12 +37,10 @@ class Play:
       self.score=score
       self.answered_Qs=answered_Qs
 
-    
-
-       
+           
     def checking_Q(self):
          self.pickedset.picking_set()
-
+         
          if self.pickedset.Q in self.answered_Qs:
             return True
          
@@ -141,5 +139,5 @@ questions={
 
 play=Play(questions)
 play.display_Question()
-play.taking_answer()
+
 
