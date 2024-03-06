@@ -1,5 +1,20 @@
 
 import random
+import time
+import threading
+
+seconds = 0
+done = False
+
+def counter():
+    global seconds
+    global done
+    
+    while not done:
+        time.sleep(1)
+        seconds+=1
+
+threading.Thread(target=counter).start()  
 
 class PickedSet:
     def __init__(self,random_pick, Q=None, choices=None, answer=None, hint=None) -> None:
@@ -93,7 +108,9 @@ class Play:
 
 
     def PLAY_AGAIN(self):
-        print(f'score: {self.score}\n-------------------------------------------------------\n')
+        global done
+        done = True
+        print(f'score: {self.score} pt(s)\ntime: {seconds} seconds\n-------------------------------------------------------')
         ask=input('would you like to play again? (Y/N) ').upper()
         print('-------------------------------------------------------')
         print()
@@ -104,9 +121,15 @@ class Play:
 
 
     def reset_game(self):
+          global seconds
+          global done
+          seconds = 0
           self.answered_Qs.clear()
           self.score=0
+          done = False
+          threading.Thread(target=counter).start()
           self.display_Question()
+           
           
 
 
