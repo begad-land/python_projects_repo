@@ -1,5 +1,5 @@
 
-#vendor operations
+import string
 import random as rn
 class VendorData:
     def __init__(self, v_id = None, name = None, password = None , data_base = {}) -> None:
@@ -42,7 +42,7 @@ class VendorData:
             self.password = input('insert your password ')  
             
         with open('movies/v_data.txt', 'a') as file :
-            file.write(f'\n{self.v_id}-{self.name}-{self.password}')
+            file.writelines(f'{self.v_id}-{self.name}-{self.password}\n')
             
         return True    
          
@@ -56,9 +56,39 @@ class VendorData:
             self.sign_up()
 
 
+class VendorOperations:
+    def __init__(self, movie_name = None, seats = [], genre = None) -> None:
+        self.movie_name = movie_name
+        self.seats = seats
+        self.genre = genre
+        self.letters = list(string.ascii_uppercase) 
 
-v = VendorData()
-v.preparing_data()
+    def operation_choices(self):
+        print('1)Add movie\n2)List customer bookings\n3)Remove movie\n4)Confirm customer booking\n5)Exit')
+        operation = input('what would you like to do? ')
+        
+        while operation not in ['1','2','3','4']:
+            print('invalid operation')
+            print('1)Add movie\n2)List customer bookings\n3)Remove movie\n4)Confirm customer booking')
+            operation = input('what would you like to do? ')
+        if operation == '1':
+            self.add_movie()              
+            
+    def add_movie(self):
+        random_letter = rn.choice(self.letters)
+        self.movie_name = input('insert movie name ').title()
+        self.name = input('insert genre ').title()
+        for i in range(10):
+            self.seats.append(f'#{random_letter}{i}')
+        with open('movies/movies.txt', 'a') as file :
+            file.writelines(f'{self.movie_name}-{self.genre}-{self.seats}\n')
+            
+    #def list customer bookings()
+        
+        
+
+v = VendorOperations()
+v.add_movie()
 
 
             
