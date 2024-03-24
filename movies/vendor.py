@@ -56,6 +56,7 @@ class VendorData:
             self.sign_up()
 
 
+
 class VendorOperations:
     def __init__(self, movie_name = None , seats = [] , genre = None , available_movies = {}) -> None:
         self.movie_name = movie_name
