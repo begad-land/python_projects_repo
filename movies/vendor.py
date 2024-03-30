@@ -1,5 +1,7 @@
 
 #list movie bookings
+#change the way you write movies into files
+import json
 import string
 import random as rn
 class VendorData:
