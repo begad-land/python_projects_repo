@@ -60,24 +60,28 @@ class VendorData:
 
 
 class VendorOperations:
-    def __init__(self, movie_name = None , seats = [] , genre = None , available_movies = {}) -> None:
+    def __init__(self, movie_name = None , seats = [] , genre = None , json_dict = {}) -> None:
         self.movie_name = movie_name
         self.seats = seats
         self.genre = genre
-        self.available_movies = available_movies
+        self.json_dict = json_dict
         self.letters = list(string.ascii_uppercase) 
         
         
     def getting_movies(self):        
-        with open('movies/movies.txt', 'r') as f:
-            lines = f.readlines()
-            for line in lines:
-                data = line.split('-')
-                data[2] = data[2].replace('\n' , '')
-                self.available_movies[data[0]] = [
-                                            data[1], data[2] 
-                                          ]
+        pass
         
+    def write_in_json(self):
+        #converts python dict to data that thats suitable for json
+        json_obj = json.dumps(self.json_dict , indent=2)
+        #wrties the converted data in the file
+
+        with open('movies\movies.json' , 'w') as f:
+            f.write(json_obj)
+            
+    def read_from_json(self):
+        with open('movies\movies.json' , 'r') as f:
+            self.json_dict = json.loads(f.read())   
         
     def operation_choices(self):
         print('1)Add movie\n2)Remove movie\n3)List movie bookings\n4)Confirm customer booking\n5)Exit')
@@ -99,8 +103,9 @@ class VendorOperations:
         self.genre = input('insert genre ').title()
         for i in range(1,11):
             self.seats.append(f'#{random_letter}{i}')
-        with open('movies/movies.txt', 'a') as file :
-            file.writelines(f'{self.movie_name}-{self.genre}-{self.seats}\n')
+        
+        self.json_dict['movies'][self.movie_name] = [self.seats, self.genre]
+        self.write_in_json()
             
     def remove_movie(self):
         print('----------------------available movies----------------------')
@@ -117,10 +122,8 @@ class VendorOperations:
         print('movie removed')
         
 v = VendorOperations()
+v.read_from_json()
 v.add_movie()
-v.getting_movies()
-v.remove_movie()
-
 
             
 
