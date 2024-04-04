@@ -60,11 +60,11 @@ class VendorData:
 
 
 class VendorOperations:
-    def __init__(self, movie_name = None , seats = [] , genre = None , json_dict = {}) -> None:
+    def __init__(self, movie_name = None , seats = [] , genre = None , json_movies = {}) -> None:
         self.movie_name = movie_name
         self.seats = seats
         self.genre = genre
-        self.json_dict = json_dict
+        self.json_movies = json_movies
         self.letters = list(string.ascii_uppercase) 
         
         
@@ -73,7 +73,7 @@ class VendorOperations:
         
     def write_in_json(self):
         #converts python dict to data that thats suitable for json
-        json_obj = json.dumps(self.json_dict , indent=2)
+        json_obj = json.dumps(self.json_movies , indent=2)
         #wrties the converted data in the file
 
         with open('movies\movies.json' , 'w') as f:
@@ -81,7 +81,7 @@ class VendorOperations:
             
     def read_from_json(self):
         with open('movies\movies.json' , 'r') as f:
-            self.json_dict = json.loads(f.read())   
+            self.json_movies = json.loads(f.read())   
         
     def operation_choices(self):
         print('1)Add movie\n2)Remove movie\n3)List movie bookings\n4)Confirm customer booking\n5)Exit')
@@ -104,21 +104,18 @@ class VendorOperations:
         for i in range(1,11):
             self.seats.append(f'#{random_letter}{i}')
         
-        self.json_dict['movies'][self.movie_name] = [self.seats, self.genre]
+        self.json_movies['movies'][self.movie_name] = [self.seats, self.genre]
         self.write_in_json()
             
     def remove_movie(self):
         print('----------------------available movies----------------------')
-        for title, content in self.available_movies.items():
-            print(f'Title: {title}\nAvailable seats: {content[1]}\nGenre: {content[0]}\n-----------------------------------------------------------')
+        for title, content in self.json_movies['movies'].items():
+            print(f'Title: {title}\nAvailable seats: {content[0]}\nGenre: {content[1]}\n-----------------------------------------------------------')
 
         name = input('insert the name of the movie you want to remove ').title()
         
-        del self.available_movies[name]
-        
-        with open('movies/movies.txt' , 'w') as f: 
-            for title, content in self.available_movies.items():
-                f.writelines(f'{title}-{content[0]}-{content[1]}\n')
+        del self.json_movies['movies'][name]
+        self.write_in_json()
         print('movie removed')
         
 v = VendorOperations()
