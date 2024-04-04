@@ -1,6 +1,6 @@
 
-#list movie bookings
-#change the way you write movies into files
+
+#TODO remove the pending user when added to movie confirmatioins list (will need to create a new json file for that)
 import json
 import string
 import random as rn
@@ -60,28 +60,33 @@ class VendorData:
 
 
 class VendorOperations:
-    def __init__(self, movie_name = None , seats = [] , genre = None , json_movies = {}) -> None:
+    def __init__(self, movie_name = None , seats = [] , genre = None , json_movies = {},pending = {}) -> None:
         self.movie_name = movie_name
         self.seats = seats
         self.genre = genre
         self.json_movies = json_movies
         self.letters = list(string.ascii_uppercase) 
+        self.pending = pending
         
-        
-    def getting_movies(self):        
-        pass
+    
         
     def write_in_json(self):
         #converts python dict to data that thats suitable for json
-        json_obj = json.dumps(self.json_movies , indent=2)
-        #wrties the converted data in the file
-
+        json_obj1 = json.dumps(self.json_movies , indent=2)
         with open('movies\movies.json' , 'w') as f:
-            f.write(json_obj)
+            f.write(json_obj1)
+        
+        json_obj2 = json.dumps(self.pending , indent=2) 
+        with open('movies\pending.json' , 'w') as file:
+            file.write(json_obj2)
+        
             
     def read_from_json(self):
         with open('movies\movies.json' , 'r') as f:
             self.json_movies = json.loads(f.read())   
+            
+        with open('movies/pending.json' , 'r') as file:
+            self.pending = json.loads(file.read())
         
     def operation_choices(self):
         print('1)Add movie\n2)Remove movie\n3)List movie bookings\n4)Confirm customer booking\n5)Exit')
@@ -102,9 +107,10 @@ class VendorOperations:
         self.movie_name = input('insert movie name ').title()
         self.genre = input('insert genre ').title()
         for i in range(1,11):
-            self.seats.append(f'#{random_letter}{i}')
+            self.seats.append(f'{random_letter}{i}')
         
         self.json_movies['movies'][self.movie_name] = [self.seats, self.genre]
+        self.pending['movies'][self.movie_name] = [] 
         self.write_in_json()
             
     def remove_movie(self):
