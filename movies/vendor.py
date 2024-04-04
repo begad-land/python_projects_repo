@@ -1,6 +1,7 @@
 
 
 #TODO remove the pending user when added to movie confirmatioins list (will need to create a new json file for that)
+#and remove reserved seats
 import json
 import string
 import random as rn
