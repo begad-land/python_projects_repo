@@ -3,7 +3,7 @@
 #TODO 
 #figure out as way to send ticket ID to user
 #create a class that contains all the classes and makes them work togeher in the correct sequental
-#order
+#fix booked_json problem (the booking get erassed when writing)
 
 import json
 import string
