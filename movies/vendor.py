@@ -1,7 +1,10 @@
 
 
-#TODO remove the pending user when added to movie confirmatioins list (will need to create a new json file for that)
-#and remove reserved seats
+#TODO 
+#figure out as way to send ticket ID to user
+#create a class that contains all the classes and makes them work togeher in the correct sequental
+#order
+
 import json
 import string
 import random as rn
@@ -61,33 +64,59 @@ class VendorData:
 
 
 class VendorOperations:
-    def __init__(self, movie_name = None , seats = [] , genre = None , json_movies = {},pending = {}) -> None:
+    def __init__(self, movie_name = None , seats = [] , genre = None , json_movies = {},pending = {}, booked = {}) -> None:
         self.movie_name = movie_name
         self.seats = seats
         self.genre = genre
         self.json_movies = json_movies
         self.letters = list(string.ascii_uppercase) 
         self.pending = pending
+        self.booked = booked
         
     
         
     def write_in_json(self):
         #converts python dict to data that thats suitable for json
         json_obj1 = json.dumps(self.json_movies , indent=2)
-        with open('movies\movies.json' , 'w') as f:
-            f.write(json_obj1)
+        with open('movies/movies.json' , 'w') as file1:
+            file1.write(json_obj1)
         
         json_obj2 = json.dumps(self.pending , indent=2) 
-        with open('movies\pending.json' , 'w') as file:
-            file.write(json_obj2)
+        with open('movies\pending.json' , 'w') as file2:
+            file2.write(json_obj2)
+            
+        json_obj3 = json.dumps(self.booked , indent = 2)
+        with open('movies/booked.json' , 'w') as file3:
+            file3.write(json_obj3)
         
             
     def read_from_json(self):
-        with open('movies\movies.json' , 'r') as f:
-            self.json_movies = json.loads(f.read())   
+        with open('movies\movies.json' , 'r') as file1:
+            self.json_movies = json.loads(file1.read())   
             
-        with open('movies/pending.json' , 'r') as file:
-            self.pending = json.loads(file.read())
+        with open('movies\pending.json' , 'r') as file2:
+            self.pending = json.loads(file2.read())
+            
+        with open('movies/booked.json' , 'r') as file3:
+            self.booked = json.loads(file3.read())
+            
+    def remove_seats(self):
+        chosen_seats = {}
+        for movie, data in self.pending['movies'].items():
+            if len(data) != 0:
+                for datum in data:
+                    chosen_seats[movie] = [datum[1] for datum in data]
+            data.clear()
+            
+        for title, seats in chosen_seats.items():
+            for seat in seats:
+                self.json_movies['movies'][title][0].remove(seat)
+    
+        self.write_in_json()
+            
+         
+            
+                 
         
     def operation_choices(self):
         print('1)Add movie\n2)Remove movie\n3)List movie bookings\n4)Confirm customer booking\n5)Exit')
@@ -125,11 +154,15 @@ class VendorOperations:
         self.write_in_json()
         print('movie removed')
         
+    def confirm_booking(self):
+        self.booked = self.pending
+        self.write_in_json()    
+        self.remove_seats()    
+    
+    
+        
+        
 v = VendorOperations()
 v.read_from_json()
-v.add_movie()
+v.confirm_booking()
 
-            
-
-    
-             
