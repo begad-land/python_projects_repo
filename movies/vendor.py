@@ -3,7 +3,7 @@
 #TODO 
 #figure out as way to send ticket ID to user
 #create a class that contains all the classes and makes them work togeher in the correct sequental
-#fix booked_json problem (the booking get erassed when writing)
+#
 
 import json
 import string
@@ -112,8 +112,9 @@ class VendorOperations:
             for seat in seats:
                 self.json_movies['movies'][title][0].remove(seat)
     
-        self.write_in_json()
-            
+        json_obj2 = json.dumps(self.pending , indent=2) 
+        with open('movies\pending.json' , 'w') as file2:
+            file2.write(json_obj2)
          
             
                  
