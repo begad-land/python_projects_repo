@@ -2,7 +2,7 @@
 
 #TODO 
 #figure out as way to send ticket ID to user
-#create a class that contains all the classes and makes them work togeher in the correct sequental
+#create a class that contains all the classes and makes them work togeher in the correct sequental order
 #
 
 import json
@@ -111,13 +111,7 @@ class VendorOperations:
         for title, seats in chosen_seats.items():
             for seat in seats:
                 self.json_movies['movies'][title][0].remove(seat)
-    
-        json_obj2 = json.dumps(self.pending , indent=2) 
-        with open('movies\pending.json' , 'w') as file2:
-            file2.write(json_obj2)
-         
-            
-                 
+                        
         
     def operation_choices(self):
         print('1)Add movie\n2)Remove movie\n3)List movie bookings\n4)Confirm customer booking\n5)Exit')
@@ -156,9 +150,13 @@ class VendorOperations:
         print('movie removed')
         
     def confirm_booking(self):
-        self.booked = self.pending
+        for title, data in self.pending['movies'].items():
+            for datum in data:
+                datum.append(f'{datum[1][0]}_{rn.randint(10,999)}')
+                self.booked['movies'][title].append(datum)
+        self.remove_seats()       
         self.write_in_json()    
-        self.remove_seats()    
+            
     
     
         
