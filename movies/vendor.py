@@ -2,8 +2,8 @@
 
 #TODO 
 #figure out as way to send ticket ID to user
-#create a class that contains all the classes and makes them work togeher in the correct sequental order
-#
+#run the code
+
 
 import json
 import string
@@ -119,13 +119,17 @@ class VendorOperations:
         
         while operation not in ['1','2','3','4']:
             print('invalid operation')
-            print('1)Add movie\n2)List customer bookings\n3)Remove movie\n4)Confirm customer booking')
+            print('1)Add movie\n2)List customer bookings and confirm them\n3)Remove movie\n4)Exit')
             operation = input('what would you like to do? ')
             
         if operation == '1':
             self.add_movie()
         elif operation == '2':
-            self.remove_movie()              
+            self.show_pending_list()
+        elif operation == '3':
+            self.remove_movie()
+        elif operation == '4':
+            exit()          
             
     def add_movie(self):
         random_letter = rn.choice(self.letters)
@@ -148,20 +152,50 @@ class VendorOperations:
         del self.json_movies['movies'][name]
         self.write_in_json()
         print('movie removed')
-        
-    def confirm_booking(self):
+    
+    
+    def show_pending_list(self):
         for title, data in self.pending['movies'].items():
-            for datum in data:
-                datum.append(f'{datum[1][0]}_{rn.randint(10,999)}')
-                self.booked['movies'][title].append(datum)
+            if len(data) != 0:
+                print(f'{title}: {data}')
+        ask = input('confirm bookings? (y/n) ').lower()
+        
+        if ask == 'y':
+            self.confirm_booking()
+        else:
+            return
+
+
+    def confirm_booking(self):
+        
+        for title, data in self.pending['movies'].items():
+            if len(data) != 0:
+                print(f'{title}: {data}')
+                for datum in data:
+                    datum.append(f'{datum[1][0]}_{rn.randint(10,999)}')
+                    self.booked['movies'][title].append(datum)
         self.remove_seats()       
         self.write_in_json()    
             
-    
-    
-        
-        
-v = VendorOperations()
-v.read_from_json()
-v.confirm_booking()
 
+   
+    
+class Vendor:
+    def __init__(self) -> None:
+        self.v_data = VendorData()
+        self.vendor_ops = VendorOperations()
+        
+    def getting_data(self):
+        self.vendor_ops.read_from_json()
+        self.v_data.preparing_data()
+        self.v_data.check_account()
+    
+    def operations(self):
+        while True:
+            self.vendor_ops.operation_choices()
+            
+    
+        
+vendor = Vendor()
+vendor.getting_data()
+vendor.operations()
