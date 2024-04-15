@@ -1,6 +1,10 @@
 
 import random as rn
 import json
+#TODO
+#fix login issue
+#show ticket to user
+
 
 class CustomerData:
     def __init__(self ,c_id = None, name = None, email= None, phone_number = None, password = None, database = {} ) -> None:
