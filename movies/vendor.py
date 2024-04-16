@@ -1,8 +1,7 @@
 
 
 #TODO 
-#figure out as way to send ticket ID to user
-#run the code
+#finish customer
 
 
 import json
@@ -24,15 +23,14 @@ class VendorData:
                 self.data_base[data[1]] = [
                                             data[0], data[2] 
                                           ]
-        self.check_account()
                 
     def log_in(self):
-        self.name = input('insert your name ').title()
+        self.name = input('insert your name ')
         self.password = input('insert your password ')
         
-        while self.name not in self.data_base:
+        while self.name not in self.data_base :
             print("Couldn't fine the inserted username. Try again")
-            self.name = input('insert your name ').title()
+            self.name = input('insert your name ')
             self.password = input('insert your password ')
         
         if self.data_base[self.name][1] == self.password:
@@ -40,7 +38,7 @@ class VendorData:
                          
     def sign_up(self): 
         self.v_id = f'#v_{rn.randint(10000, 999999)}'
-        self.name = input('insert your name ').title() 
+        self.name = input('insert your name ')
         self.password = input('insert your password ')  
 
         while self.name in self.data_base:
@@ -50,7 +48,7 @@ class VendorData:
             
         with open('movies/v_data.txt', 'a') as file :
             file.writelines(f'{self.v_id}-{self.name}-{self.password}\n')  
-        return True   
+        return
             
     def check_account(self):
         ask = input('Do you have an account? (y/n) ').lower()
@@ -114,12 +112,12 @@ class VendorOperations:
                         
         
     def operation_choices(self):
-        print('1)Add movie\n2)Remove movie\n3)List movie bookings\n4)Confirm customer booking\n5)Exit')
+        print('1)Add movie\n2)List customer bookings and confirm them\n3)Remove movie\n4)List movies\n5)Exit')
         operation = input('what would you like to do? ')
         
-        while operation not in ['1','2','3','4']:
+        while operation not in ['1','2','3','4','5']:
             print('invalid operation')
-            print('1)Add movie\n2)List customer bookings and confirm them\n3)Remove movie\n4)Exit')
+            print('1)Add movie\n2)List customer bookings and confirm them\n3)Remove movie\n4)List movies\n5)Exit')
             operation = input('what would you like to do? ')
             
         if operation == '1':
@@ -129,8 +127,17 @@ class VendorOperations:
         elif operation == '3':
             self.remove_movie()
         elif operation == '4':
-            exit()          
+            self.list_movies()          
+        elif operation == '5':
+            exit()
+        
+    def list_movies(self):
+        print('---------------------available movies--------------------')
+        for title , data in self.json_movies['movies'].items():
+            print(f'Title: {title}\nGenre: {data[1]}\nSeats: {data[0]}\n---------------------------------')
+        #return
             
+    
     def add_movie(self):
         random_letter = rn.choice(self.letters)
         self.movie_name = input('insert movie name ').title()
@@ -155,9 +162,17 @@ class VendorOperations:
     
     
     def show_pending_list(self):
+        no_items = 0
         for title, data in self.pending['movies'].items():
             if len(data) != 0:
                 print(f'{title}: {data}')
+                continue
+            no_items+=1
+
+        if no_items == len(self.pending['movies']):
+            print('All bookings confirmed')
+            return
+                  
         ask = input('confirm bookings? (y/n) ').lower()
         
         if ask == 'y':
@@ -170,7 +185,6 @@ class VendorOperations:
         
         for title, data in self.pending['movies'].items():
             if len(data) != 0:
-                print(f'{title}: {data}')
                 for datum in data:
                     datum.append(f'{datum[1][0]}_{rn.randint(10,999)}')
                     self.booked['movies'][title].append(datum)
@@ -192,7 +206,9 @@ class Vendor:
     
     def operations(self):
         while True:
+            print('---------------------------------')
             self.vendor_ops.operation_choices()
+        
             
     
         
