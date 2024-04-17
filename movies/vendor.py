@@ -2,7 +2,9 @@
 
 #TODO 
 #finish customer
-
+#run the code (problem at confirm booking)
+#you want to append the user name from booked_json into customer_tickets
+#and customer_tickets.json keeps having book.json in it so figure that out
 
 import json
 import string
@@ -62,7 +64,7 @@ class VendorData:
 
 
 class VendorOperations:
-    def __init__(self, movie_name = None , seats = [] , genre = None , json_movies = {},pending = {}, booked = {}) -> None:
+    def __init__(self, movie_name = None , seats = [] , genre = None , json_movies = {},pending = {}, booked = {} , customer_tickets = {}) -> None:
         self.movie_name = movie_name
         self.seats = seats
         self.genre = genre
@@ -70,6 +72,7 @@ class VendorOperations:
         self.letters = list(string.ascii_uppercase) 
         self.pending = pending
         self.booked = booked
+        self.customer_tickets = customer_tickets
         
     
         
@@ -86,6 +89,11 @@ class VendorOperations:
         json_obj3 = json.dumps(self.booked , indent = 2)
         with open('movies/booked.json' , 'w') as file3:
             file3.write(json_obj3)
+            
+        json_obj4 = json.dumps(self.booked , indent = 2)
+        with open('movies/customer_tickets.json' , 'w') as file4:
+            file4.write(json_obj4)
+        
         
             
     def read_from_json(self):
@@ -97,6 +105,10 @@ class VendorOperations:
             
         with open('movies/booked.json' , 'r') as file3:
             self.booked = json.loads(file3.read())
+            
+        with open('movies/customer_tickets.json' , 'r') as file4:
+            self.customer_tickets = json.loads(file4.read())   
+            
             
     def remove_seats(self):
         chosen_seats = {}
@@ -147,6 +159,7 @@ class VendorOperations:
         
         self.json_movies['movies'][self.movie_name] = [self.seats, self.genre]
         self.pending['movies'][self.movie_name] = [] 
+        self.booked['movies'][self.movie_name] = [] 
         self.write_in_json()
             
     def remove_movie(self):
@@ -157,6 +170,8 @@ class VendorOperations:
         name = input('insert the name of the movie you want to remove ').title()
         
         del self.json_movies['movies'][name]
+        del self.json_pending['movies'][name]
+        del self.json_booked['movies'][name]
         self.write_in_json()
         print('movie removed')
     
@@ -182,13 +197,16 @@ class VendorOperations:
 
 
     def confirm_booking(self):
-        
         for title, data in self.pending['movies'].items():
+            self.customer_tickets['customer'][datum[0]] = []    
             if len(data) != 0:
                 for datum in data:
-                    datum.append(f'{datum[1][0]}_{rn.randint(10,999)}')
+                    ticket_id = f'{datum[1][0]}_{rn.randint(10,999)}'
+                    datum.append(ticket_id)
                     self.booked['movies'][title].append(datum)
-        self.remove_seats()       
+                    
+                    self.customer_tickets['customer'][datum[0]].append([ticket_id , datum[1]])
+        self.remove_seats()
         self.write_in_json()    
             
 
@@ -209,8 +227,7 @@ class Vendor:
             print('---------------------------------')
             self.vendor_ops.operation_choices()
         
-            
-    
+        
         
 vendor = Vendor()
 vendor.getting_data()

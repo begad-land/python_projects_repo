@@ -2,8 +2,7 @@
 import random as rn
 import json
 #TODO
-#fix login issue
-#show ticket to user
+#you need to go into the bboo
 
 
 class CustomerData:
@@ -59,12 +58,14 @@ class CustomerData:
 
 
 class CustomerBooking():
-    def __init__(self,chosen_movie = None ,json_movies = {} , pending = {} , user_name = None) -> None:
+    def __init__(self,chosen_movie = None ,json_movies = {} , pending = {} , user_name = None, customer_tickets = {}) -> None:
         self.chosen_movie = chosen_movie
         self.json_movies = json_movies
         self.pending = pending
+        self.customer_tickets = customer_tickets
         self.customer_data = CustomerData()
         self.user_name = self.customer_data.log_in()
+        
 
     def write_in_json(self):
         json_obj = json.dumps(self.pending, indent = 2)
@@ -90,9 +91,9 @@ class CustomerBooking():
             
     def booking_movie(self):
         
-        
         choice = input('insert movie name ').title()
         chosen_movie = self.json_movies['movies'][choice]
+        
       
         
         print(f'Title: {choice}\nGenre: {chosen_movie[1]}\nSeats: {chosen_movie[0]}\n-----------------------------------')
@@ -100,7 +101,6 @@ class CustomerBooking():
         seat = input('insert the seat that you want ').title()
         seats = self.json_movies['movies'][choice][0]
         seat_and_username = [self.user_name, seat]
-        
         
         pending_list = self.pending['movies'][choice]
         pending_list.append(seat_and_username)
