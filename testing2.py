@@ -11,5 +11,3 @@ x = {
 
 
 
-print(len(x['movies']))
-

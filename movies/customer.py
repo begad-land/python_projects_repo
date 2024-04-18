@@ -3,6 +3,9 @@ import random as rn
 import json
 #TODO
 #you need to go into the bboo
+#about show_tickets function
+#this is alright for now but it prints everything each time the name logged in with is found you already tried to group
+#the data of each name in a dict but it was too had so now try to group the data of the name logged in with in a list the data being movie name, seats , ticket fo which seat so make a list for eech peice of info good luck
 
 
 class CustomerData:
@@ -58,13 +61,14 @@ class CustomerData:
 
 
 class CustomerBooking():
-    def __init__(self,chosen_movie = None ,json_movies = {} , pending = {} , user_name = None, customer_tickets = {}) -> None:
+    def __init__(self,chosen_movie = None ,json_movies = {} , pending = {} , user_name = None, booked = {}, customer_tickets = {}) -> None:
         self.chosen_movie = chosen_movie
         self.json_movies = json_movies
         self.pending = pending
-        self.customer_tickets = customer_tickets
         self.customer_data = CustomerData()
         self.user_name = self.customer_data.log_in()
+        self.booked = booked
+        self.customer_tickets = customer_tickets
         
 
     def write_in_json(self):
@@ -82,11 +86,36 @@ class CustomerBooking():
         with open('movies\pending.json' , 'r') as file:
             self.pending = json.loads(file.read())
             
+            
+        with open('movies/booked.json' , 'r') as file3:
+            self.booked = json.loads(file3.read())    
 
     def view_movies(self):
         print('---------------------available movies--------------------')
         for title , data in self.json_movies['movies'].items():
             print(f'Title: {title}\nGenre: {data[1]}\nSeats: {data[0]}\n---------------------------------')
+
+
+ #   "Blood": [
+      #[
+      #  "begad",
+     #   "Y1",
+    #    "Y_705"
+   #   ]
+  #  ]
+ # }
+#}
+
+
+
+    def show_tickets(self):
+        for title, data in self.booked.items():
+            for datum in data:
+                if self.user_name == datum[0]:
+                    print(f'movies booked: {title}\nticket ID: {datum[2]}\nchosen seats: {datum[1]}')
+
+            
+                    
 
             
     def booking_movie(self):
@@ -113,8 +142,7 @@ c1.preparing_data()
 
 c2 = CustomerBooking()
 c2.read_from_json()
-c2.view_movies()
-c2.booking_movie()
+c2.show_tickets()
 
 
 

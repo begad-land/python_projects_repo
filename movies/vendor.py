@@ -198,19 +198,16 @@ class VendorOperations:
 
     def confirm_booking(self):
         for title, data in self.pending['movies'].items():
-            self.customer_tickets['customer'][datum[0]] = []    
             if len(data) != 0:
                 for datum in data:
                     ticket_id = f'{datum[1][0]}_{rn.randint(10,999)}'
                     datum.append(ticket_id)
                     self.booked['movies'][title].append(datum)
-                    
-                    self.customer_tickets['customer'][datum[0]].append([ticket_id , datum[1]])
         self.remove_seats()
         self.write_in_json()    
+        
             
-
-   
+                        
     
 class Vendor:
     def __init__(self) -> None:
