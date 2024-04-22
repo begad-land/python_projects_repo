@@ -90,9 +90,6 @@ class VendorOperations:
         with open('movies/booked.json' , 'w') as file3:
             file3.write(json_obj3)
             
-        json_obj4 = json.dumps(self.booked , indent = 2)
-        with open('movies/customer_tickets.json' , 'w') as file4:
-            file4.write(json_obj4)
         
         
             
@@ -106,8 +103,7 @@ class VendorOperations:
         with open('movies/booked.json' , 'r') as file3:
             self.booked = json.loads(file3.read())
             
-        with open('movies/customer_tickets.json' , 'r') as file4:
-            self.customer_tickets = json.loads(file4.read())   
+   
             
             
     def remove_seats(self):

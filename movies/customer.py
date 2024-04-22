@@ -2,11 +2,7 @@
 import random as rn
 import json
 #TODO
-#you need to go into the bboo
-#about show_tickets function
-#this is alright for now but it prints everything each time the name logged in with is found you already tried to group
-#the data of each name in a dict but it was too had so now try to group the data of the name logged in with in a list the data being movie name, seats , ticket fo which seat so make a list for eech peice of info good luck
-
+#you gathered all the tickets and seats in one place (movie_seats dict) now find a way to display them
 
 class CustomerData:
     def __init__(self ,c_id = None, name = None, email= None, phone_number = None, password = None, database = {} ) -> None:
@@ -61,7 +57,8 @@ class CustomerData:
 
 
 class CustomerBooking():
-    def __init__(self,chosen_movie = None ,json_movies = {} , pending = {} , user_name = None, booked = {}, customer_tickets = {}) -> None:
+    def __init__(self,chosen_movie = None ,json_movies = {} , pending = {} , user_name = None, booked = {}, 
+                customer_tickets = {}, movie_seats = {}, ) -> None:
         self.chosen_movie = chosen_movie
         self.json_movies = json_movies
         self.pending = pending
@@ -69,6 +66,7 @@ class CustomerBooking():
         self.user_name = self.customer_data.log_in()
         self.booked = booked
         self.customer_tickets = customer_tickets
+        self.movie_seats = movie_seats
         
 
     def write_in_json(self):
@@ -108,11 +106,24 @@ class CustomerBooking():
 
 
 
-    def show_tickets(self):
-        for title, data in self.booked.items():
+    def gather_tickets(self):
+        for title, data in self.booked['movies'].items():
+            self.movie_seats[title] = []
+        
+        for title, data in self.booked['movies'].items():
             for datum in data:
-                if self.user_name == datum[0]:
-                    print(f'movies booked: {title}\nticket ID: {datum[2]}\nchosen seats: {datum[1]}')
+                if self.user_name == datum[0]:    
+                    self.movie_seats[title].append([datum[1] , datum[2]])
+                    
+                
+    #def show_tickets(self):
+        #print(f'Hello {self.user_name}\nBooking info:')
+        #for title , data in self.movie_seats.items():
+            #for datum in data:
+                #print(f'{title}:\ntickets: {datum[1]}\nseats: {datum[0]}')
+            #print('------------------------------------------------------')         
+ 
+
 
             
                     
@@ -133,6 +144,7 @@ class CustomerBooking():
         
         pending_list = self.pending['movies'][choice]
         pending_list.append(seat_and_username)
+        print('movie booked successfully :O')
         self.write_in_json()
         
             
@@ -142,7 +154,9 @@ c1.preparing_data()
 
 c2 = CustomerBooking()
 c2.read_from_json()
+c2.gather_tickets()
 c2.show_tickets()
+
 
 
 
