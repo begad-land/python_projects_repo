@@ -2,7 +2,9 @@
 import random as rn
 import json
 #TODO
-#you gathered all the tickets and seats in one place (movie_seats dict) now find a way to display them
+#you are viewing the seats and tickets perfectly now group everythin in a composing class and givebthe user the ability 
+#to navigate through the program and do diffrent things like: view movies, view bookings in the future you should create 
+#the option for the user to remove a booking but thats later bca u got more important shit to do (courses)
 
 class CustomerData:
     def __init__(self ,c_id = None, name = None, email= None, phone_number = None, password = None, database = {} ) -> None:
@@ -94,40 +96,25 @@ class CustomerBooking():
             print(f'Title: {title}\nGenre: {data[1]}\nSeats: {data[0]}\n---------------------------------')
 
 
- #   "Blood": [
-      #[
-      #  "begad",
-     #   "Y1",
-    #    "Y_705"
-   #   ]
-  #  ]
- # }
-#}
-
-
-
     def gather_tickets(self):
         for title, data in self.booked['movies'].items():
-            self.movie_seats[title] = []
+            self.movie_seats[title] = [[],[]]
         
         for title, data in self.booked['movies'].items():
             for datum in data:
                 if self.user_name == datum[0]:    
-                    self.movie_seats[title].append([datum[1] , datum[2]])
+                    self.movie_seats[title][0].append(datum[1]) #seats
+                    self.movie_seats[title][1].append(datum[2]) #tickets
                     
-                
-    #def show_tickets(self):
-        #print(f'Hello {self.user_name}\nBooking info:')
-        #for title , data in self.movie_seats.items():
-            #for datum in data:
-                #print(f'{title}:\ntickets: {datum[1]}\nseats: {datum[0]}')
-            #print('------------------------------------------------------')         
- 
-
+                                
+    def show_tickets(self):
+        for title, data in self.movie_seats.items():
+            if len(data[0]):
+                seats = str(data[0])[1:-1]
+                tickets = str(data[1])[1:-1]
+                print(f'{title}:\nSeats booked: {seats}\nTickets: {tickets}\n----------------------------------------')
 
             
-                    
-
             
     def booking_movie(self):
         
@@ -147,7 +134,10 @@ class CustomerBooking():
         print('movie booked successfully :O')
         self.write_in_json()
         
-            
+    
+    
+#class Customer:
+        
 
 c1 = CustomerData()
 c1.preparing_data()
