@@ -1,10 +1,7 @@
 
 
 #TODO 
-#finish customer
-#run the code (problem at confirm booking)
-#you want to append the user name from booked_json into customer_tickets
-#and customer_tickets.json keeps having book.json in it so figure that out
+
 
 import json
 import string
@@ -218,7 +215,7 @@ class Vendor:
     def operations(self):
         while True:
             print('---------------------------------')
-            self.vendor_ops.operation_choices()
+            self.vendor_ops.operation_choiceskk()
         
         
         
