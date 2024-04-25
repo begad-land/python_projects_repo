@@ -215,7 +215,7 @@ class Vendor:
     def operations(self):
         while True:
             print('---------------------------------')
-            self.vendor_ops.operation_choiceskk()
+            self.vendor_ops.operation_choices()
         
         
         

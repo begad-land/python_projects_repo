@@ -94,6 +94,24 @@ class CustomerBooking():
         print('---------------------available movies--------------------')
         for title , data in self.json_movies['movies'].items():
             print(f'Title: {title}\nGenre: {data[1]}\nSeats: {data[0]}\n---------------------------------')
+        
+            
+    def booking_movie(self):
+        
+        choice = input('insert movie name ').title()
+        chosen_movie = self.json_movies['movies'][choice]
+            
+        print(f'Title: {choice}\nGenre: {chosen_movie[1]}\nSeats: {chosen_movie[0]}\n-----------------------------------')
+        
+        seat = input('insert the seat that you want ').title()
+        seats = self.json_movies['movies'][choice][0]
+        seat_and_username = [self.user_name, seat]
+        
+        pending_list = self.pending['movies'][choice]
+        pending_list.append(seat_and_username)
+        print('movie booked successfully :O')
+        self.write_in_json()        
+            
 
 
     def gather_tickets(self):
@@ -114,39 +132,47 @@ class CustomerBooking():
                 tickets = str(data[1])[1:-1]
                 print(f'{title}:\nSeats booked: {seats}\nTickets: {tickets}\n----------------------------------------')
 
-            
-            
-    def booking_movie(self):
-        
-        choice = input('insert movie name ').title()
-        chosen_movie = self.json_movies['movies'][choice]
-        
-      
-        
-        print(f'Title: {choice}\nGenre: {chosen_movie[1]}\nSeats: {chosen_movie[0]}\n-----------------------------------')
-        
-        seat = input('insert the seat that you want ').title()
-        seats = self.json_movies['movies'][choice][0]
-        seat_and_username = [self.user_name, seat]
-        
-        pending_list = self.pending['movies'][choice]
-        pending_list.append(seat_and_username)
-        print('movie booked successfully :O')
-        self.write_in_json()
-        
+
     
     
-#class Customer:
+class Customer:
+    def __init__(self) -> None:
+        self.c_data = CustomerData()
+        self.c_data.preparing_data()
+        self.c_booking = CustomerBooking()
+        self.c_booking.read_from_json()
+        
+    def c_ops(self):
+       print(f'------------------------------\n1)View movies\n2)View bookings\n3)Log out')
+       operation = input('what would you like to do ')
+       
+       if operation == '1':
+               self.c_booking.view_movies()
+               self.c_booking.booking_movie()
+
+       elif operation == '2':
+               self.c_booking.gather_tickets()
+               self.c_booking.show_tickets()
+               
+       elif operation == '3':
+           exit()
+           
+           
+        
+        
         
 
-c1 = CustomerData()
-c1.preparing_data()
+#c1 = CustomerData()
+#c1.preparing_data()
 
-c2 = CustomerBooking()
-c2.read_from_json()
-c2.gather_tickets()
-c2.show_tickets()
-
-
+#c2 = CustomerBooking()
+#c2.read_from_json()
+#c2.gather_tickets()
+#c2.show_tickets()
 
 
+
+c = Customer()
+while True:
+    c.c_ops()
+#c.getting_data()
