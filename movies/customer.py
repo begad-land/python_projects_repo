@@ -157,22 +157,8 @@ class Customer:
        elif operation == '3':
            exit()
            
-           
-        
-        
-        
-
-#c1 = CustomerData()
-#c1.preparing_data()
-
-#c2 = CustomerBooking()
-#c2.read_from_json()
-#c2.gather_tickets()
-#c2.show_tickets()
-
 
 
 c = Customer()
 while True:
     c.c_ops()
-#c.getting_data()
