@@ -7,47 +7,52 @@ import json
 import string
 import random as rn
 class VendorData:
-    def __init__(self, v_id = None, name = None, password = None , data_base = {}) -> None:
+    def __init__(self, v_id = None, name = None, password = None , data_base = {}, vendor_data = {}) -> None:
         self.v_id = v_id
         self.name = name
         self.password = password
         self.data_base = data_base
+        self.vendor_data = vendor_data
+     
+    def write_in_json(self):
+        #converts python dict to data that thats suitable for json
+        json_obj1 = json.dumps(self.vendor_data , indent=2)
+        with open('movies/vendor.json' , 'w') as file1:
+            file1.write(json_obj1) 
+            
+    def read_from_json(self):
+        with open('movies/vendor.json' , 'r') as file1:
+            self.vendor_data = json.loads(file1.read()) 
         
-    def preparing_data(self):        
-        with open('movies/v_data.txt', 'r') as f:
-            lines = f.readlines()
-            for line in lines:
-                data = line.split('-')
-                data[2] = data[2].replace('\n' , '')
-                self.data_base[data[1]] = [
-                                            data[0], data[2] 
-                                          ]
-                
+  
     def log_in(self):
         self.name = input('insert your name ')
         self.password = input('insert your password ')
         
-        while self.name not in self.data_base :
-            print("Couldn't fine the inserted username. Try again")
+        while self.name not in self.vendor_data['vendor'] or self.password not in self.vendor_data['vendor'][self.name]:
+            print("Wrong username or password. Try again")
             self.name = input('insert your name ')
             self.password = input('insert your password ')
+            print('---------------------------------------------')
         
-        if self.data_base[self.name][1] == self.password:
-            print(f'welcome {self.name}')
+        print(f'welcome {self.name}')
                          
     def sign_up(self): 
         self.v_id = f'#v_{rn.randint(10000, 999999)}'
         self.name = input('insert your name ')
         self.password = input('insert your password ')  
 
-        while self.name in self.data_base:
+        while self.name in self.vendor_data['vendor']:
             print(f'\n{self.name} is taken. Try a different one')
-            self.name = input('insert your name ').title() 
+            self.name = input('insert your name ')
             self.password = input('insert your password ')  
-            
-        with open('movies/v_data.txt', 'a') as file :
-            file.writelines(f'{self.v_id}-{self.name}-{self.password}\n')  
-        return
+        
+        self.vendor_data['vendor'][self.name] = [self.password, self.v_id]
+        
+        print(f'welcome {self.name}')
+        self.write_in_json()
+        #with open('movies/v_data.txt', 'a') as file :
+            #file.writelines(f'{self.v_id}-{self.name}-{self.password}\n')  
             
     def check_account(self):
         ask = input('Do you have an account? (y/n) ').lower()
@@ -209,7 +214,7 @@ class Vendor:
         
     def getting_data(self):
         self.vendor_ops.read_from_json()
-        self.v_data.preparing_data()
+        self.v_data.read_from_json()
         self.v_data.check_account()
     
     def operations(self):
