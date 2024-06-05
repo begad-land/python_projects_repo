@@ -13,6 +13,7 @@ class VendorData:
         self.password = password
         self.data_base = data_base
         self.vendor_data = vendor_data
+        self.read_from_json()
      
     def write_in_json(self):
         #converts python dict to data that thats suitable for json
@@ -75,7 +76,7 @@ class VendorOperations:
         self.pending = pending
         self.booked = booked
         self.customer_tickets = customer_tickets
-        
+        self.read_from_json()
     
         
     def write_in_json(self):
@@ -213,8 +214,6 @@ class Vendor:
         self.vendor_ops = VendorOperations()
         
     def getting_data(self):
-        self.vendor_ops.read_from_json()
-        self.v_data.read_from_json()
         self.v_data.check_account()
     
     def operations(self):
