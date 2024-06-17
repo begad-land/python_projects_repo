@@ -41,10 +41,11 @@ class Calculations:
         self.Qnt=Qnt
         self.total=total
         self.fees=fees
-        self.takingorder=TakingOrder()
+        self.takingorder1=TakingOrder()
+
     
     def calc_total(self):
-        for price in self.takingorder.order.values():
+        for price in self.takingorder1.order.values():
             self.total+=price['Price']
 
         return round(self.total,2)
@@ -61,7 +62,7 @@ class Calculations:
        return round(self.discount,2)
     
     def quantity(self):
-        for i in self.takingorder.order.values():
+        for i in self.takingorder1.order.values():
             self.Qnt+=i['Quantity']
 
         return self.Qnt
@@ -70,6 +71,7 @@ class Invoice:
     def __init__(self) -> None:
        self.takingorder=TakingOrder() 
        self.calculations=Calculations()
+       print()
 
     def invoice_presentaion(self):
 
